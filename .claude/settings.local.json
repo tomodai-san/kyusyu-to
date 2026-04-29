@@ -5,7 +5,15 @@
       "Bash(npm install *)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4321/)",
       "Bash(curl -s -o /dev/null -w '%{http_code}' http://localhost:4321__TRACKED_VAR__)",
-      "Bash(curl -s http://localhost:4321/sitemap-index.xml)"
+      "Bash(curl -s http://localhost:4321/sitemap-index.xml)",
+      "Bash(gh repo *)",
+      "Bash(git branch *)",
+      "Bash(git push *)",
+      "Bash(wrangler --version)",
+      "Bash(npx wrangler *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(xargs sed *)"
     ]
   }
 }

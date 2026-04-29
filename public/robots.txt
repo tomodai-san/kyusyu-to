@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kyushu-explorer.com/sitemap-index.xml
+Sitemap: https://realkyushu.com/sitemap-index.xml

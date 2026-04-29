@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   // 本番ドメインが決まったら変更する
-  site: 'https://kyushu-explorer.com',
+  site: 'https://realkyushu.com',
 
   // 静的出力（Cloudflare Pages はこれで動く）
   output: 'static',
