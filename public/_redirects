@@ -1,0 +1,6 @@
+# Cloudflare Pages redirects
+# Add permanent redirects here as needed
+# Example: /old-page  /new-page  301
+
+# SPA fallback (not needed for static Astro, but safe to include)
+# /*  /index.html  200
