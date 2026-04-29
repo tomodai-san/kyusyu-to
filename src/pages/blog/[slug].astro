@@ -1,0 +1,196 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AffiliateBox from '../../components/AffiliateBox.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { blogPosts } from '../../data/blogPosts';
+
+export function getStaticPaths() {
+  return blogPosts.map(p => ({ params: { slug: p.slug }, props: { post: p } }));
+}
+
+const { post: p } = Astro.props;
+const related = blogPosts.filter(b => b.slug !== p.slug && b.category === p.category).slice(0, 2);
+const formattedDate = new Date(p.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": p.title,
+  "description": p.excerpt,
+  "image": p.image,
+  "author": { "@type": "Person", "name": p.author },
+  "datePublished": p.date,
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kyushu Explorer",
+    "logo": { "@type": "ImageObject", "url": "https://kyushu-explorer.com/favicon.svg" }
+  },
+  "url": `https://kyushu-explorer.com/blog/${p.slug}`,
+};
+---
+
+<BaseLayout
+  title={p.title}
+  description={p.excerpt}
+  image={p.image}
+  type="article"
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="relative h-[50vh] min-h-[360px] flex items-end" data-hero-page>
+    <div class="absolute inset-0 z-0">
+      <img
+        src={p.image}
+        alt={p.title}
+        class="w-full h-full object-cover"
+        width="1200"
+        height="600"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#1a2744] via-[#1a2744]/40 to-transparent"></div>
+    </div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 w-full">
+      <nav class="flex items-center gap-2 text-white/60 text-sm mb-4">
+        <a href="/" class="hover:text-white">Home</a>
+        <span>/</span>
+        <a href="/blog" class="hover:text-white">Blog</a>
+        <span>/</span>
+        <span class="text-white truncate">{p.title}</span>
+      </nav>
+      <div class="flex items-center gap-3 mb-3">
+        <span class="tag bg-[#bc002d] text-white">{p.category}</span>
+        <span class="text-white/60 text-sm">{p.readTime}</span>
+      </div>
+      <h1 class="font-serif font-bold text-4xl md:text-5xl text-white leading-tight">{p.title}</h1>
+    </div>
+  </section>
+
+  <!-- Author bar -->
+  <section class="bg-white border-b border-stone-100">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full bg-[#bc002d] flex items-center justify-center text-white font-bold text-sm">
+          {p.author.charAt(0)}
+        </div>
+        <div>
+          <div class="font-semibold text-[#1a2744] text-sm">{p.author}</div>
+          <div class="text-stone-400 text-xs">{formattedDate}</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        {p.tags.slice(0, 3).map(tag => (
+          <span class="text-xs bg-stone-100 text-stone-600 px-2.5 py-1 rounded-full hidden sm:inline-block">
+            #{tag}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Article -->
+  <article class="py-14 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2">
+          <!-- Lead -->
+          <p class="text-xl text-stone-600 leading-relaxed mb-8 font-medium">{p.excerpt}</p>
+
+          <!-- Article body placeholder — in a real site this would come from MDX/CMS -->
+          <div class="prose-japan">
+            <p>
+              Kyushu, Japan's southernmost main island, is a destination that rewards curious travellers willing to look beyond the well-worn Tokyo–Kyoto–Osaka trail. With its extraordinary diversity of landscapes — from the smoking caldera of Mt. Aso to the pristine subtropical forests of Yakushima — and a culinary scene that arguably surpasses any region in Japan, Kyushu deserves far more attention than it currently receives from international visitors.
+            </p>
+            <p>
+              Whether you're planning your first trip to Japan or returning for a deeper dive, this comprehensive guide will help you make the most of your time on this remarkable island.
+            </p>
+
+            <h2>The Essentials</h2>
+            <p>
+              Kyushu covers roughly 36,000 km² and is divided into seven prefectures, each with its own distinct character. The island is served by the Kyushu Shinkansen running north to south, plus an excellent network of limited express trains covering every major destination. You genuinely do not need a rental car to explore Kyushu's highlights.
+            </p>
+
+            <h2>Practical Information</h2>
+            <ul>
+              <li><strong>Entry requirements:</strong> UK, US, Australian, Canadian, and EU citizens can stay up to 90 days visa-free in Japan.</li>
+              <li><strong>Currency:</strong> Japan is largely cash-based outside of cities; carry yen. 7-Eleven and Japan Post ATMs accept international cards.</li>
+              <li><strong>Transport:</strong> The JR Kyushu Rail Pass covers all Shinkansen and limited express trains. Buy it before you leave home.</li>
+              <li><strong>Language:</strong> English is not widely spoken outside tourist areas. Download the Google Translate app with Japanese offline.</li>
+            </ul>
+
+            <h2>Our Top Recommendation</h2>
+            <p>
+              If you're pressed for time, focus on the Fukuoka–Yufuin–Beppu triangle. It captures the essence of Kyushu — street food, hot springs, mountain scenery — and is easily doable in 3–4 days, accessible by some of Japan's most scenic train journeys.
+            </p>
+          </div>
+
+          <!-- Affiliate mid-article -->
+          <div class="my-10">
+            <AffiliateBox
+              type="klook"
+              url="https://www.klook.com/affiliate/kyushu-explorer"
+              title="Book Tours & Experiences"
+              description="Kyushu onsen day passes, food tours, scenic train tickets and more."
+            />
+          </div>
+
+          <div class="prose-japan">
+            <h2>Final Thoughts</h2>
+            <p>
+              Kyushu is the Japan that many travellers dream of but rarely find: authentic, unhurried, breathtakingly beautiful, and utterly original. It's a place where ancient traditions live comfortably alongside modern Japan, where you can soak in a private forest rotenburo at dawn and eat exceptional ramen from a street stall at midnight.
+            </p>
+            <p>
+              We hope this guide helps you plan an unforgettable visit. Feel free to explore our <a href="/destinations">destination guides</a>, <a href="/itineraries">ready-made itineraries</a>, and <a href="/ryokan">ryokan recommendations</a> for more detailed planning resources.
+            </p>
+          </div>
+
+          <!-- Tags -->
+          <div class="mt-10 pt-8 border-t border-stone-100">
+            <div class="flex flex-wrap gap-2">
+              {p.tags.map(tag => (
+                <span class="text-sm bg-stone-100 text-stone-600 px-3 py-1 rounded-full">#{tag}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="space-y-6 lg:pt-0">
+          <div class="bg-[#faf8f3] rounded-2xl p-6 sticky top-24">
+            <h3 class="font-serif font-bold text-lg text-[#1a2744] mb-4">Plan Your Trip</h3>
+            <div class="space-y-3">
+              {[
+                { href: '/destinations', label: '📍 Explore Destinations' },
+                { href: '/itineraries', label: '🗓️ View Itineraries' },
+                { href: '/ryokan', label: '♨️ Find Ryokan' },
+                { href: '/blog', label: '📖 More Articles' },
+              ].map(l => (
+                <a href={l.href} class="flex items-center gap-2 text-sm font-medium text-stone-700 hover:text-[#bc002d] transition-colors">
+                  {l.label}
+                </a>
+              ))}
+            </div>
+            <div class="mt-6">
+              <AffiliateBox
+                type="booking"
+                url="https://www.booking.com/affiliate/kyushu-explorer"
+                title="Book Your Hotel"
+                description="Find great deals on accommodation across Kyushu."
+              />
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </article>
+
+  <!-- Related Posts -->
+  {related.length > 0 && (
+    <section class="py-14 bg-[#faf8f3]">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="font-serif font-bold text-2xl text-[#1a2744] mb-6">You Might Also Like</h2>
+        <div class="grid sm:grid-cols-2 gap-6">
+          {related.map(r => <BlogCard post={r} />)}
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>

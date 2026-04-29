@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RyokanCard from '../../components/RyokanCard.astro';
+import AffiliateBox from '../../components/AffiliateBox.astro';
+import { ryokans } from '../../data/ryokan';
+
+const categories = ['All', 'luxury', 'boutique', 'traditional', 'budget'] as const;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Best Ryokan in Kyushu",
+  "description": "Hand-picked traditional Japanese inns across Kyushu",
+  "itemListElement": ryokans.map((r, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "name": r.name,
+    "url": `https://kyushu-explorer.com/ryokan/${r.slug}`,
+  }))
+};
+---
+
+<BaseLayout
+  title="Best Ryokan in Kyushu — Traditional Japanese Inn Guide"
+  description="Our hand-picked guide to the best ryokan in Kyushu: from luxury onsen retreats in Yufuin and Beppu to authentic budget guesthouses in Fukuoka and Nagasaki."
+  schema={schema}
+>
+  <!-- Header -->
+  <section class="bg-[#1a2744] py-24 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-15">
+      <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1600&q=80" alt="" class="w-full h-full object-cover" />
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="tag bg-white/10 text-[#c9a84c] mb-4 inline-block">Where to Stay</div>
+      <h1 class="font-serif font-bold text-5xl md:text-6xl text-white mb-4">Best Ryokan in Kyushu</h1>
+      <p class="text-white/70 text-lg max-w-2xl mx-auto">
+        Hand-picked traditional inns across Kyushu, chosen for authentic character, outstanding onsen, and genuine omotenashi hospitality.
+      </p>
+    </div>
+  </section>
+
+  <!-- What is a Ryokan -->
+  <section class="py-14 bg-[#faf8f3] border-b border-stone-200">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="font-serif font-bold text-3xl text-[#1a2744] mb-4">What is a Ryokan?</h2>
+          <p class="text-stone-600 leading-relaxed mb-4">
+            A <strong>ryokan</strong> (旅館) is a traditional Japanese inn combining tatami-floored rooms, futon bedding, yukata robes, communal or private onsen baths, and elaborate multi-course <em>kaiseki</em> dinners — usually included in the room rate.
+          </p>
+          <p class="text-stone-600 leading-relaxed">
+            Staying in a good ryokan is one of Japan's most memorable cultural experiences. Kyushu, as Japan's hot spring capital, has some of the finest ryokan anywhere in the country.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          {[
+            { icon: '🛁', title: 'Onsen Baths', desc: 'Hot spring mineral baths, often private' },
+            { icon: '🍱', title: 'Kaiseki Dinner', desc: 'Seasonal multi-course tasting menu' },
+            { icon: '👘', title: 'Yukata Robes', desc: 'Traditional cotton robes for your stay' },
+            { icon: '🛏️', title: 'Futon Bedding', desc: 'Laid out on tatami by house staff' },
+          ].map(f => (
+            <div class="bg-white rounded-xl p-4 shadow-sm text-center">
+              <div class="text-2xl mb-2">{f.icon}</div>
+              <div class="font-semibold text-sm text-[#1a2744]">{f.title}</div>
+              <div class="text-xs text-stone-500 mt-1">{f.desc}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ryokan Grid -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Featured -->
+      <div class="mb-14">
+        <h2 class="font-serif font-bold text-3xl text-[#1a2744] mb-2">Our Top Picks</h2>
+        <p class="text-stone-500 mb-8">Vetted for quality, authenticity, and exceptional onsen experiences.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {ryokans.filter(r => r.featured).map(r => <RyokanCard ryokan={r} />)}
+        </div>
+      </div>
+
+      {ryokans.filter(r => !r.featured).length > 0 && (
+        <div>
+          <h2 class="font-serif font-bold text-3xl text-[#1a2744] mb-8">More Ryokan</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {ryokans.filter(r => !r.featured).map(r => <RyokanCard ryokan={r} />)}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Booking Tips -->
+  <section class="py-16 bg-[#faf8f3]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="font-serif font-bold text-3xl text-[#1a2744] mb-8 text-center">Ryokan Booking Tips</h2>
+      <div class="grid sm:grid-cols-2 gap-5">
+        {[
+          { tip: 'Book 2–3 months ahead', detail: 'Popular ryokan in Yufuin and Kurokawa fill up quickly, especially on weekends and during peak foliage season.' },
+          { tip: 'Check if meals are included', detail: 'Most ryokan quote a per-person rate including dinner and breakfast. Always clarify before booking.' },
+          { tip: 'Tell them your dietary needs', detail: 'Good ryokan can accommodate vegetarian, vegan, or allergy requirements with advance notice.' },
+          { tip: 'Arrive before 6pm', detail: 'Kaiseki dinner is typically served from 6–7pm. Arrive early to settle in, change into yukata, and enjoy the baths first.' },
+        ].map(t => (
+          <div class="bg-white rounded-xl p-6 shadow-sm">
+            <h3 class="font-semibold text-[#1a2744] mb-2">✓ {t.tip}</h3>
+            <p class="text-stone-600 text-sm leading-relaxed">{t.detail}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Affiliate -->
+  <section class="py-12 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-6">
+        <AffiliateBox type="booking" url="https://www.booking.com/affiliate/kyushu-explorer" title="Search Ryokan on Booking.com" />
+        <AffiliateBox type="klook" url="https://www.klook.com/affiliate/kyushu-explorer" title="Book Onsen Day Passes on Klook" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

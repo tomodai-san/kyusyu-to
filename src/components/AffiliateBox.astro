@@ -1,0 +1,67 @@
+---
+interface Props {
+  type: 'booking' | 'klook';
+  title?: string;
+  description?: string;
+  url?: string;
+  buttonText?: string;
+  class?: string;
+}
+
+const {
+  type,
+  title,
+  description,
+  url = '#',
+  buttonText,
+  class: className = '',
+} = Astro.props;
+
+const defaults = {
+  booking: {
+    title: 'Book Your Stay in Kyushu',
+    description: 'Find the best ryokan and hotel deals with free cancellation on most properties.',
+    buttonText: 'Search on Booking.com',
+    logo: '🏨',
+    bg: 'bg-[#003580]',
+    btnBg: 'bg-[#feba02] hover:bg-[#f5ad00] text-[#003580]',
+  },
+  klook: {
+    title: 'Book Tours & Activities',
+    description: 'Kyushu onsen day passes, cooking classes, day tours, and unique local experiences.',
+    buttonText: 'Browse on Klook',
+    logo: '🎌',
+    bg: 'bg-[#ff4747]',
+    btnBg: 'bg-white hover:bg-stone-50 text-[#ff4747]',
+  },
+};
+
+const cfg = defaults[type];
+const resolvedTitle = title ?? cfg.title;
+const resolvedDesc = description ?? cfg.description;
+const resolvedBtn = buttonText ?? cfg.buttonText;
+---
+
+<div class:list={['rounded-2xl p-6 text-white', cfg.bg, className]}>
+  <div class="flex items-start gap-4">
+    <div class="text-3xl flex-shrink-0">{cfg.logo}</div>
+    <div class="flex-1 min-w-0">
+      <h3 class="font-serif font-bold text-xl mb-1">{resolvedTitle}</h3>
+      <p class="text-white/80 text-sm mb-4">{resolvedDesc}</p>
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer sponsored"
+        class:list={['inline-flex items-center gap-2 font-semibold text-sm px-5 py-2.5 rounded-full transition-colors', cfg.btnBg]}
+      >
+        {resolvedBtn}
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+        </svg>
+      </a>
+    </div>
+  </div>
+  <p class="text-white/40 text-xs mt-4">
+    Affiliate link — we may earn a small commission at no extra cost to you.
+  </p>
+</div>

@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AffiliateBox from '../../components/AffiliateBox.astro';
+import RyokanCard from '../../components/RyokanCard.astro';
+import { ryokans } from '../../data/ryokan';
+
+export function getStaticPaths() {
+  return ryokans.map(r => ({ params: { slug: r.slug }, props: { ryokan: r } }));
+}
+
+const { ryokan: r } = Astro.props;
+const related = ryokans.filter(x => x.slug !== r.slug && x.prefecture === r.prefecture).slice(0, 2);
+const moreRyokan = related.length < 2 ? ryokans.filter(x => x.slug !== r.slug).slice(0, 2 - related.length) : [];
+const allRelated = [...related, ...moreRyokan].slice(0, 2);
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": r.name,
+  "description": r.description,
+  "image": r.image,
+  "address": { "@type": "PostalAddress", "addressLocality": r.location, "addressCountry": "JP" },
+  "priceRange": r.priceRange,
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": r.rating,
+    "reviewCount": r.reviewCount,
+    "bestRating": 5
+  }
+};
+---
+
+<BaseLayout
+  title={`${r.name} Review — ${r.location} Ryokan`}
+  description={`${r.name}: ${r.tagline}. ${r.description.slice(0, 130)}...`}
+  image={r.image}
+  type="article"
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="relative h-[55vh] min-h-[400px] flex items-end" data-hero-page>
+    <div class="absolute inset-0 z-0">
+      <img src={r.image} alt={r.name} class="w-full h-full object-cover" width="1200" height="600" />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#1a2744] via-[#1a2744]/30 to-transparent"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 w-full">
+      <nav class="flex items-center gap-2 text-white/60 text-sm mb-4">
+        <a href="/" class="hover:text-white">Home</a>
+        <span>/</span>
+        <a href="/ryokan" class="hover:text-white">Best Ryokan</a>
+        <span>/</span>
+        <span class="text-white">{r.name}</span>
+      </nav>
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        <span class="bg-[#bc002d] text-white text-xs font-semibold px-3 py-1 rounded-full capitalize">{r.category}</span>
+        <span class="bg-[#1a2744] text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20">{r.priceRange}</span>
+      </div>
+      <h1 class="font-serif font-bold text-4xl md:text-5xl text-white mb-2">{r.name}</h1>
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-1">
+          {[1,2,3,4,5].map(star => (
+            <svg class:list={['w-4 h-4', star <= Math.round(r.rating) ? 'text-[#c9a84c]' : 'text-white/30']} viewBox="0 0 20 20" fill="currentColor">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+          ))}
+        </div>
+        <span class="text-white font-bold">{r.rating}</span>
+        <span class="text-white/60 text-sm">({r.reviewCount.toLocaleString()} reviews)</span>
+        <span class="text-white/60 text-sm">· {r.location}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2">
+          <!-- Overview -->
+          <h2 class="font-serif font-bold text-3xl text-[#1a2744] mb-4">About {r.name}</h2>
+          <p class="text-xl text-stone-600 italic mb-5">&ldquo;{r.tagline}&rdquo;</p>
+          <div class="prose-japan">
+            <p>{r.description}</p>
+            <p>
+              Staying at {r.name} offers everything that makes a Kyushu ryokan special: the calming ritual of changing into your yukata, the quiet pleasure of a long soak in naturally heated mineral waters, and a multi-course kaiseki dinner showcasing the season's finest local ingredients.
+            </p>
+            <h2>What to Expect</h2>
+            <p>
+              Upon arrival, guests are welcomed with green tea and seasonal sweets before being shown to their room. Tatami flooring, a low table, and carefully arranged seasonal flowers create an atmosphere of effortless refinement. In the evening, house staff will lay out your futon while you enjoy dinner.
+            </p>
+            <p>
+              The onsen baths are open for most of the day and typically have separate men's and women's sections, with private baths bookable for couples or families. Morning is the best time to bathe — the air is cool, the light is magical, and the waters are blissfully quiet.
+            </p>
+          </div>
+
+          <!-- Amenities -->
+          <div class="mt-10 bg-[#faf8f3] rounded-2xl p-7">
+            <h3 class="font-serif font-bold text-xl text-[#1a2744] mb-5">Amenities & Facilities</h3>
+            <div class="grid sm:grid-cols-2 gap-3">
+              {r.amenities.map(a => (
+                <div class="flex items-center gap-3 text-sm">
+                  <span class="text-[#bc002d] font-bold flex-shrink-0">✓</span>
+                  <span class="text-stone-700">{a}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Klook Box -->
+          <div class="mt-8">
+            <AffiliateBox
+              type="klook"
+              url="https://www.klook.com/affiliate/kyushu-explorer"
+              title="Day Trips & Activities Nearby"
+              description={`Explore the best tours and experiences near ${r.location}.`}
+            />
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="space-y-5">
+          <!-- Booking Card -->
+          <div class="bg-[#faf8f3] rounded-2xl p-6 sticky top-24">
+            <div class="text-center mb-5">
+              <div class="text-3xl font-serif font-bold text-[#bc002d]">{r.rating} / 5</div>
+              <div class="flex justify-center gap-0.5 mt-1">
+                {[1,2,3,4,5].map(s => (
+                  <svg class:list={['w-4 h-4', s <= Math.round(r.rating) ? 'text-[#c9a84c]' : 'text-stone-300']} viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <div class="text-stone-400 text-xs mt-1">{r.reviewCount.toLocaleString()} guest reviews</div>
+            </div>
+
+            <dl class="space-y-3 mb-5">
+              {[
+                { label: 'Location', value: r.location },
+                { label: 'Category', value: r.category.charAt(0).toUpperCase() + r.category.slice(1) },
+                { label: 'Price', value: r.priceRange + ' per person/night' },
+              ].map(f => (
+                <div class="flex justify-between text-sm">
+                  <dt class="text-stone-500">{f.label}</dt>
+                  <dd class="font-medium text-[#1a2744]">{f.value}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <a
+              href={r.bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              class="w-full flex items-center justify-center gap-2 bg-[#003580] hover:bg-[#002a6a] text-white font-semibold py-3.5 px-5 rounded-xl transition-colors text-sm"
+            >
+              Check Availability
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+              </svg>
+            </a>
+            <p class="text-center text-xs text-stone-400 mt-3">via Booking.com · Affiliate link</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related -->
+  {allRelated.length > 0 && (
+    <section class="py-14 bg-[#faf8f3]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="font-serif font-bold text-2xl text-[#1a2744] mb-6">More Ryokan to Consider</h2>
+        <div class="grid sm:grid-cols-2 gap-6">
+          {allRelated.map(x => <RyokanCard ryokan={x} />)}
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>

@@ -1,0 +1,74 @@
+---
+/**
+ * PhotoFrame — wrapper for all content images.
+ *
+ * Usage:
+ *   <PhotoFrame
+ *     src="https://..."
+ *     alt="Kyushu mountains"
+ *     aspect="4/3"          // any CSS aspect-ratio value
+ *     photoId="hero-home"   // unique ID — makes bulk photo swap easy
+ *     credit="John Smith / Unsplash"
+ *   />
+ *
+ * To swap a real photo later:
+ *   1. Find <div data-photo-id="hero-home"> in the DOM / source
+ *   2. Replace src on the <img> inside, update alt & credit
+ */
+
+interface Props {
+  src: string;
+  alt: string;
+  aspect?: string;
+  photoId?: string;
+  credit?: string;
+  class?: string;
+  imgClass?: string;
+  loading?: 'lazy' | 'eager';
+  width?: number;
+  height?: number;
+  priority?: boolean;
+}
+
+const {
+  src,
+  alt,
+  aspect = 'auto',
+  photoId,
+  credit,
+  class: wrapClass = '',
+  imgClass = '',
+  loading = 'lazy',
+  width,
+  height,
+  priority = false,
+} = Astro.props;
+---
+
+<div
+  class:list={['photo-frame', wrapClass]}
+  style={`aspect-ratio: ${aspect};`}
+  data-photo-id={photoId}
+>
+  <!-- Skeleton shimmer shown until image loads -->
+  <div class="photo-skeleton" aria-hidden="true"></div>
+
+  <img
+    src={src}
+    alt={alt}
+    loading={priority ? 'eager' : loading}
+    fetchpriority={priority ? 'high' : undefined}
+    decoding={priority ? 'sync' : 'async'}
+    width={width}
+    height={height}
+    class:list={['relative z-10', imgClass]}
+    onload="this.previousElementSibling?.remove()"
+    onerror="this.previousElementSibling?.remove()"
+  />
+
+  {credit && (
+    <div class="absolute bottom-0 right-0 z-20 px-2 py-1 bg-black/40 text-white/70 text-[10px] rounded-tl-lg pointer-events-none">
+      {credit}
+    </div>
+  )}
+</div>

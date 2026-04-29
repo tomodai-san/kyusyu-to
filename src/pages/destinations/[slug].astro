@@ -1,0 +1,179 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AffiliateBox from '../../components/AffiliateBox.astro';
+import { destinations } from '../../data/destinations';
+import { ryokans } from '../../data/ryokan';
+import RyokanCard from '../../components/RyokanCard.astro';
+
+export function getStaticPaths() {
+  return destinations.map(d => ({ params: { slug: d.slug }, props: { destination: d } }));
+}
+
+const { destination: d } = Astro.props;
+const localRyokans = ryokans.filter(r => r.prefecture === d.prefecture).slice(0, 3);
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "TouristDestination",
+  "name": d.name,
+  "description": d.description,
+  "image": d.image,
+  "touristType": "International travellers",
+  "geo": { "@type": "Place", "name": `${d.name}, ${d.prefecture}, Kyushu, Japan` },
+  "url": `https://kyushu-explorer.com/destinations/${d.slug}`,
+};
+---
+
+<BaseLayout
+  title={`${d.name} Travel Guide — ${d.tagline}`}
+  description={`Complete travel guide to ${d.name}, Kyushu. ${d.description.slice(0, 130)}...`}
+  image={d.image}
+  type="article"
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="relative h-[60vh] min-h-[400px] flex items-end" data-hero-page>
+    <div class="absolute inset-0 z-0">
+      <img
+        src={d.image}
+        alt={`${d.name}, ${d.prefecture}`}
+        class="w-full h-full object-cover"
+        width="1200"
+        height="600"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#1a2744] via-[#1a2744]/30 to-transparent"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 w-full">
+      <nav class="flex items-center gap-2 text-white/60 text-sm mb-4">
+        <a href="/" class="hover:text-white transition-colors">Home</a>
+        <span>/</span>
+        <a href="/destinations" class="hover:text-white transition-colors">Destinations</a>
+        <span>/</span>
+        <span class="text-white">{d.name}</span>
+      </nav>
+      <div class="tag mb-3 bg-white/20 text-white border border-white/30">{d.prefecture}</div>
+      <h1 class="font-serif font-bold text-5xl md:text-6xl text-white mb-2">{d.name}</h1>
+      <p class="text-[#c9a84c] text-xl font-medium">{d.tagline}</p>
+    </div>
+  </section>
+
+  <!-- Quick Info Bar -->
+  <section class="bg-[#1a2744] py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap items-center gap-6 text-sm text-white/80">
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-[#c9a84c]" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span><strong class="text-white">Travel time:</strong> {d.travelTime}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-[#c9a84c]" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 9v7.5" />
+          </svg>
+          <span><strong class="text-white">Best time:</strong> {d.bestTime}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-12">
+        <!-- Article Body -->
+        <div class="lg:col-span-2">
+          <div class="prose-japan">
+            <h2>About {d.name}</h2>
+            <p class="lead text-xl text-stone-600 leading-relaxed">{d.description}</p>
+
+            <h2>Top Highlights</h2>
+            <ul>
+              {d.highlights.map(h => <li>{h}</li>)}
+            </ul>
+
+            <h2>Getting There</h2>
+            <p>
+              {d.name} is well connected to the rest of Kyushu by the JR network.
+              From Fukuoka (Hakata station), {d.travelTime.toLowerCase()}.
+              A <strong>JR Kyushu Rail Pass</strong> will cover this journey and is the most cost-effective option for visitors spending more than 3 days on the island.
+            </p>
+
+            <h2>When to Visit {d.name}</h2>
+            <p>
+              The best time to visit {d.name} is <strong>{d.bestTime}</strong>.
+              Spring (late March to May) brings cherry blossoms and mild temperatures, while autumn (October to November) offers spectacular foliage. Summer is hot and humid, and July–September can see typhoons.
+              Winter is mild compared to Honshu and can be a great time to enjoy hot springs.
+            </p>
+          </div>
+
+          <!-- Affiliate inline -->
+          <div class="mt-10">
+            <AffiliateBox
+              type="klook"
+              url="https://www.klook.com/affiliate/kyushu-explorer"
+              title={`Book Tours & Activities in ${d.name}`}
+              description={`Day tours, cooking classes, cultural experiences and more in ${d.name}.`}
+            />
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="space-y-6">
+          <!-- Quick Facts -->
+          <div class="bg-[#faf8f3] rounded-2xl p-6">
+            <h3 class="font-serif font-bold text-xl text-[#1a2744] mb-4">Quick Facts</h3>
+            <dl class="space-y-3">
+              {[
+                { label: 'Prefecture', value: d.prefecture },
+                { label: 'Best Time', value: d.bestTime },
+                { label: 'From Fukuoka', value: d.travelTime },
+              ].map(f => (
+                <div class="flex justify-between text-sm">
+                  <dt class="text-stone-500">{f.label}</dt>
+                  <dd class="font-medium text-[#1a2744] text-right max-w-[60%]">{f.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          <!-- Highlights -->
+          <div class="bg-white border border-stone-200 rounded-2xl p-6">
+            <h3 class="font-serif font-bold text-xl text-[#1a2744] mb-4">Must-See & Do</h3>
+            <ul class="space-y-2">
+              {d.highlights.map(h => (
+                <li class="flex items-start gap-2 text-sm text-stone-600">
+                  <span class="text-[#bc002d] font-bold mt-0.5 flex-shrink-0">✓</span>
+                  {h}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Booking -->
+          <AffiliateBox
+            type="booking"
+            url="https://www.booking.com/affiliate/kyushu-explorer"
+            title={`Hotels in ${d.name}`}
+            description="Best rates with free cancellation on most properties."
+          />
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Local Ryokan -->
+  {localRyokans.length > 0 && (
+    <section class="py-16 bg-[#faf8f3]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-end justify-between mb-8">
+          <h2 class="font-serif font-bold text-3xl text-[#1a2744]">Where to Stay in {d.name}</h2>
+          <a href="/ryokan" class="text-[#bc002d] text-sm font-semibold hover:underline">All Ryokan →</a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {localRyokans.map(r => <RyokanCard ryokan={r} />)}
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>

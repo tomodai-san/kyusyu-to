@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ItineraryCard from '../../components/ItineraryCard.astro';
+import AffiliateBox from '../../components/AffiliateBox.astro';
+import { itineraries } from '../../data/itineraries';
+
+const themes = [...new Set(itineraries.map(i => i.theme))];
+---
+
+<BaseLayout
+  title="Kyushu Itineraries — Trip Plans for Every Travel Style"
+  description="Expert-crafted Kyushu travel itineraries from 3 to 7 days. Perfect for first-timers, couples, foodies, hikers, and culture seekers. Includes transport details and estimated costs."
+>
+  <!-- Header -->
+  <section class="bg-[#1a2744] py-24 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-15">
+      <img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=1600&q=80" alt="" class="w-full h-full object-cover" />
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="tag bg-white/10 text-[#c9a84c] mb-4 inline-block">Trip Planning</div>
+      <h1 class="font-serif font-bold text-5xl md:text-6xl text-white mb-4">Kyushu Itineraries</h1>
+      <p class="text-white/70 text-lg max-w-2xl mx-auto">
+        Every itinerary includes a day-by-day plan, transport details, accommodation recommendations, and estimated costs. Just follow the route and enjoy.
+      </p>
+    </div>
+  </section>
+
+  <!-- How to use -->
+  <section class="py-12 bg-[#faf8f3] border-b border-stone-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap justify-center gap-6">
+        {[
+          { icon: '🗓️', label: 'Choose by duration', sub: '3 to 7 days' },
+          { icon: '🎯', label: 'Filter by theme', sub: 'Culture, Onsen, Food...' },
+          { icon: '💰', label: 'Check the budget', sub: 'Budget to luxury' },
+          { icon: '🚆', label: 'All by train', sub: 'No car needed' },
+        ].map(s => (
+          <div class="flex items-center gap-3 bg-white rounded-xl px-5 py-3 shadow-sm">
+            <span class="text-2xl">{s.icon}</span>
+            <div>
+              <div class="font-semibold text-[#1a2744] text-sm">{s.label}</div>
+              <div class="text-stone-500 text-xs">{s.sub}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="font-serif font-bold text-3xl text-[#1a2744] mb-8">Featured Itineraries</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {itineraries.filter(i => i.featured).map(it => <ItineraryCard itinerary={it} />)}
+      </div>
+    </div>
+  </section>
+
+  {itineraries.filter(i => !i.featured).length > 0 && (
+    <section class="py-12 bg-[#faf8f3]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="font-serif font-bold text-3xl text-[#1a2744] mb-8">More Itineraries</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {itineraries.filter(i => !i.featured).map(it => <ItineraryCard itinerary={it} />)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Japan Rail Pass CTA -->
+  <section class="py-16 bg-[#1a2744]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="font-serif font-bold text-3xl text-white mb-4">Travel on the JR Kyushu Rail Pass</h2>
+      <p class="text-white/70 mb-8 max-w-xl mx-auto">
+        All our itineraries are designed around the excellent JR Kyushu rail network — no rental car needed. The All-Kyushu 5-Day Pass costs from around ¥18,500 and saves significant money over individual tickets.
+      </p>
+      <div class="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+        <AffiliateBox
+          type="klook"
+          url="https://www.klook.com/affiliate/kyushu-explorer"
+          title="JR Kyushu Pass on Klook"
+          description="Buy your rail pass online before you travel for the best price."
+        />
+        <AffiliateBox
+          type="booking"
+          url="https://www.booking.com/affiliate/kyushu-explorer"
+          title="Book Accommodation"
+          description="Find the best hotels and ryokan along your route."
+        />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

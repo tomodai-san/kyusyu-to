@@ -1,0 +1,87 @@
+---
+import type { Ryokan } from '../data/ryokan';
+
+interface Props {
+  ryokan: Ryokan;
+  class?: string;
+}
+
+const { ryokan: r, class: className = '' } = Astro.props;
+---
+
+<div class:list={['card-japan group flex flex-col', className]} data-photo-id={`ryokan-card-${r.slug}`}>
+
+  <!-- Image -->
+  <div class="relative overflow-hidden aspect-video">
+    <img
+      src={`${r.image.split('?')[0]}?w=600&h=340&fit=crop&q=80`}
+      alt={`${r.name} ryokan in ${r.location}`}
+      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+      loading="lazy"
+      width="600"
+      height="340"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-[#0d1117]/40 to-transparent"></div>
+
+    <!-- Top badges -->
+    <div class="absolute top-3 left-3 flex gap-1.5">
+      <span class="bg-[#bc002d] text-white text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full capitalize">
+        {r.category}
+      </span>
+      <span class="bg-[#1a2744]/80 backdrop-blur-sm text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
+        {r.priceRange}
+      </span>
+    </div>
+
+    <!-- Rating badge -->
+    <div class="absolute bottom-3 right-3 bg-white/95 backdrop-blur-sm rounded-xl px-3 py-1.5 text-center shadow-md">
+      <div class="text-[#bc002d] font-bold text-base leading-none tabular-nums">{r.rating}</div>
+      <div class="text-[9px] text-stone-400 mt-0.5">{r.reviewCount.toLocaleString()} reviews</div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="p-5 flex flex-col flex-1">
+    <h3 class="font-serif font-bold text-xl text-[#1a2744] leading-snug mb-1">{r.name}</h3>
+
+    <p class="text-stone-400 text-xs mb-2 flex items-center gap-1">
+      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0zM19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+      </svg>
+      {r.location}
+    </p>
+
+    <p class="text-[#bc002d] text-sm font-medium italic mb-3 leading-snug">{r.tagline}</p>
+    <p class="text-stone-500 text-sm leading-relaxed line-clamp-2 flex-1">{r.description}</p>
+
+    <!-- Amenity pills -->
+    <div class="flex flex-wrap gap-1.5 mt-4">
+      {r.amenities.slice(0, 3).map(a => (
+        <span class="text-xs bg-[#faf8f3] border border-stone-200 text-stone-600 px-2.5 py-1 rounded-full">{a}</span>
+      ))}
+      {r.amenities.length > 3 && (
+        <span class="text-xs bg-[#faf8f3] border border-stone-200 text-stone-400 px-2.5 py-1 rounded-full">
+          +{r.amenities.length - 3}
+        </span>
+      )}
+    </div>
+
+    <!-- Action row -->
+    <div class="mt-5 pt-4 border-t border-stone-100 flex items-center gap-2">
+      <a
+        href={`/ryokan/${r.slug}`}
+        class="flex-1 text-center text-sm font-semibold text-[#bc002d] hover:text-[#960024] transition-colors py-2 rounded-xl hover:bg-[#bc002d]/5"
+      >
+        Read Review
+      </a>
+      <a
+        href={r.bookingUrl}
+        target="_blank"
+        rel="noopener noreferrer sponsored"
+        class="flex-1 text-center bg-[#003580] hover:bg-[#002a6a] text-white text-sm font-semibold py-2.5 px-4 rounded-xl transition-colors shadow-sm hover:shadow-md"
+      >
+        Check Rates
+      </a>
+    </div>
+  </div>
+</div>

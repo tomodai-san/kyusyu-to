@@ -1,0 +1,79 @@
+---
+import type { BlogPost } from '../data/blogPosts';
+
+interface Props {
+  post: BlogPost;
+  featured?: boolean;
+  class?: string;
+}
+
+const { post: p, featured = false, class: className = '' } = Astro.props;
+
+const formattedDate = new Date(p.date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+{featured ? (
+  <a
+    href={`/blog/${p.slug}`}
+    class:list={['group grid md:grid-cols-2 gap-0 bg-white rounded-2xl overflow-hidden shadow-md card-hover', className]}
+  >
+    <div class="relative overflow-hidden aspect-[4/3] md:aspect-auto">
+      <img
+        src={p.image}
+        alt={p.title}
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        loading="lazy"
+        width="600"
+        height="400"
+      />
+    </div>
+    <div class="p-7 flex flex-col justify-center">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="tag">{p.category}</span>
+        <span class="text-stone-400 text-xs">{p.readTime}</span>
+      </div>
+      <h3 class="font-serif font-bold text-2xl text-[#1a2744] leading-snug mb-3 group-hover:text-[#bc002d] transition-colors">
+        {p.title}
+      </h3>
+      <p class="text-stone-600 text-sm leading-relaxed line-clamp-4 mb-5">{p.excerpt}</p>
+      <div class="flex items-center gap-3 text-xs text-stone-400">
+        <span class="font-medium text-stone-600">{p.author}</span>
+        <span>•</span>
+        <span>{formattedDate}</span>
+      </div>
+    </div>
+  </a>
+) : (
+  <a
+    href={`/blog/${p.slug}`}
+    class:list={['group bg-white rounded-2xl overflow-hidden shadow-md card-hover flex flex-col', className]}
+  >
+    <div class="relative overflow-hidden aspect-[16/9]">
+      <img
+        src={p.image}
+        alt={p.title}
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        loading="lazy"
+        width="400"
+        height="225"
+      />
+      <div class="absolute top-3 left-3">
+        <span class="tag bg-white/95 text-[#bc002d]">{p.category}</span>
+      </div>
+    </div>
+    <div class="p-5 flex flex-col flex-1">
+      <h3 class="font-serif font-bold text-lg text-[#1a2744] leading-snug mb-2 group-hover:text-[#bc002d] transition-colors flex-1">
+        {p.title}
+      </h3>
+      <p class="text-stone-600 text-sm leading-relaxed line-clamp-2 mb-4">{p.excerpt}</p>
+      <div class="flex items-center justify-between text-xs text-stone-400 border-t border-stone-100 pt-4">
+        <span>{p.author}</span>
+        <span>{p.readTime}</span>
+      </div>
+    </div>
+  </a>
+)}

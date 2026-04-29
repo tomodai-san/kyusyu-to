@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DestinationCard from '../../components/DestinationCard.astro';
+import AffiliateBox from '../../components/AffiliateBox.astro';
+import { destinations } from '../../data/destinations';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Kyushu Destinations",
+  "description": "Top travel destinations in Kyushu, Japan",
+  "itemListElement": destinations.map((d, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "name": d.name,
+    "url": `https://kyushu-explorer.com/destinations/${d.slug}`,
+  }))
+};
+---
+
+<BaseLayout
+  title="Kyushu Destinations — Where to Go in Kyushu, Japan"
+  description="Explore Kyushu's top destinations: Fukuoka, Nagasaki, Beppu, Kumamoto, Kagoshima and Yufuin. Detailed guides for every city and region."
+  schema={schema}
+>
+  <!-- Page Header -->
+  <section class="relative bg-[#1a2744] py-24 overflow-hidden">
+    <div class="absolute inset-0 opacity-20">
+      <img
+        src="https://images.unsplash.com/photo-1614016957547-ceba73462f37?w=1600&q=80"
+        alt=""
+        class="w-full h-full object-cover"
+      />
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="tag bg-white/10 text-[#c9a84c] mb-4 inline-block">Explore Kyushu</div>
+      <h1 class="font-serif font-bold text-5xl md:text-6xl text-white mb-4">All Destinations</h1>
+      <p class="text-white/70 text-lg max-w-2xl mx-auto">
+        From volcanic onsen towns to historic port cities — Kyushu's destinations each have a completely unique character. Here's where to go and why.
+      </p>
+    </div>
+  </section>
+
+  <!-- Destinations Grid -->
+  <section class="py-20 bg-[#faf8f3]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Featured -->
+      <div class="mb-12">
+        <h2 class="font-serif font-bold text-3xl text-[#1a2744] mb-8">Featured Destinations</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {destinations.filter(d => d.featured).map(d => (
+            <DestinationCard destination={d} />
+          ))}
+        </div>
+      </div>
+
+      <!-- All others -->
+      {destinations.filter(d => !d.featured).length > 0 && (
+        <div>
+          <h2 class="font-serif font-bold text-3xl text-[#1a2744] mb-8">More Destinations</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {destinations.filter(d => !d.featured).map(d => (
+              <DestinationCard destination={d} />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Kyushu Map Info -->
+  <section class="py-16 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-[#faf8f3] rounded-3xl p-8 md:p-12">
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <div class="tag mb-4">Getting Around</div>
+            <h2 class="font-serif font-bold text-3xl text-[#1a2744] mb-4">Kyushu by Train</h2>
+            <p class="text-stone-600 leading-relaxed mb-6">
+              Kyushu's excellent Shinkansen and limited express network connects all major destinations. The <strong>JR Kyushu Rail Pass</strong> is the most cost-effective way to travel and covers all routes below.
+            </p>
+            <ul class="space-y-3">
+              {[
+                { route: 'Fukuoka → Kumamoto', time: '35 min (Shinkansen)' },
+                { route: 'Fukuoka → Nagasaki', time: '2h (Limited Express)' },
+                { route: 'Fukuoka → Yufuin', time: '1h 45min (Yufuin no Mori)' },
+                { route: 'Fukuoka → Beppu', time: '2h 30min (Sonic Express)' },
+                { route: 'Kumamoto → Kagoshima', time: '45 min (Shinkansen)' },
+              ].map(r => (
+                <li class="flex items-center justify-between text-sm">
+                  <span class="font-medium text-[#1a2744]">{r.route}</span>
+                  <span class="text-stone-500 bg-stone-100 px-3 py-1 rounded-full">{r.time}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="bg-white rounded-2xl p-6 shadow-sm">
+            <h3 class="font-serif font-bold text-xl text-[#1a2744] mb-4">JR Kyushu Rail Pass</h3>
+            <div class="space-y-3">
+              {[
+                { pass: 'All Kyushu 3-Day Pass', price: '~¥16,500' },
+                { pass: 'All Kyushu 5-Day Pass', price: '~¥18,500' },
+                { pass: 'Northern Kyushu 3-Day', price: '~¥9,000' },
+                { pass: 'Southern Kyushu 3-Day', price: '~¥9,000' },
+              ].map(p => (
+                <div class="flex items-center justify-between text-sm border-b border-stone-100 pb-3 last:border-0 last:pb-0">
+                  <span class="text-stone-700">{p.pass}</span>
+                  <span class="font-semibold text-[#bc002d]">{p.price}</span>
+                </div>
+              ))}
+            </div>
+            <a
+              href="https://www.klook.com/affiliate/kyushu-explorer"
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              class="btn-primary w-full justify-center mt-5 text-sm"
+            >
+              Book Rail Pass on Klook
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Affiliate -->
+  <section class="py-12 bg-[#faf8f3]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <AffiliateBox
+        type="booking"
+        url="https://www.booking.com/affiliate/kyushu-explorer"
+        title="Find Hotels & Ryokan in Kyushu"
+        description="Over 5,000 properties across Kyushu — ryokan, hotels, guesthouses. Most with free cancellation."
+      />
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,504 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PhotoFrame from '../components/PhotoFrame.astro';
+import DestinationCard from '../components/DestinationCard.astro';
+import RyokanCard from '../components/RyokanCard.astro';
+import BlogCard from '../components/BlogCard.astro';
+import ItineraryCard from '../components/ItineraryCard.astro';
+import AffiliateBox from '../components/AffiliateBox.astro';
+import { destinations } from '../data/destinations';
+import { ryokans } from '../data/ryokan';
+import { blogPosts } from '../data/blogPosts';
+import { itineraries } from '../data/itineraries';
+
+const featuredDestinations = destinations.filter(d => d.featured).slice(0, 4);
+const featuredRyokans      = ryokans.filter(r => r.featured).slice(0, 3);
+const featuredBlogPosts    = blogPosts.filter(p => p.featured);
+const featuredItineraries  = itineraries.filter(i => i.featured).slice(0, 3);
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "TravelAgency",
+  "name": "Kyushu Explorer",
+  "description": "Independent travel guide to Kyushu, Japan",
+  "url": "https://kyushu-explorer.com",
+  "areaServed": { "@type": "Place", "name": "Kyushu, Japan" }
+};
+
+const sectionLink = (href: string, label: string) => ({ href, label });
+---
+
+<BaseLayout
+  title="Kyushu Explorer — Your Complete Guide to Kyushu, Japan"
+  description="Discover the best destinations, ryokan, itineraries, and travel tips for exploring Kyushu, Japan. Expert guides for English-speaking travellers from the USA, Australia, and Europe."
+  schema={schema}
+>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HERO — full-viewport, immersive
+═══════════════════════════════════════════════════════════════ -->
+<section
+  class="relative h-[100svh] min-h-[640px] flex flex-col justify-end overflow-hidden"
+  data-hero-page
+  data-photo-id="hero-main"
+  aria-label="Hero section"
+>
+  <!-- Background photo -->
+  <div class="absolute inset-0 z-0">
+    <img
+      src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1920&q=90"
+      alt="Torii gate and misty mountains in Kyushu, Japan"
+      class="w-full h-full object-cover object-center"
+      loading="eager"
+      fetchpriority="high"
+      decoding="sync"
+      width="1920"
+      height="1080"
+    />
+    <!-- Layered gradients: left-shadow for text, bottom-bar for strip -->
+    <div class="absolute inset-0 bg-gradient-to-r from-[#0d1117]/80 via-[#0d1117]/30 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-[#0d1117]/70 via-transparent via-40% to-transparent"></div>
+  </div>
+
+  <!-- Decorative vertical Japanese text (desktop only) -->
+  <div
+    class="absolute right-[5vw] top-1/2 -translate-y-1/2 z-10 hidden xl:flex flex-col items-center gap-4"
+    aria-hidden="true"
+  >
+    <div class="w-px h-20 bg-white/20"></div>
+    <span class="jp-vertical text-white/25 text-2xl font-bold tracking-[0.5em] select-none">
+      九州探検
+    </span>
+    <div class="w-px h-20 bg-white/20"></div>
+  </div>
+
+  <!-- Season badge — top right (desktop) -->
+  <div
+    class="absolute top-28 right-6 lg:right-12 z-10 hidden sm:flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 text-white text-sm"
+    aria-label="Current season"
+  >
+    <span class="w-2 h-2 rounded-full bg-[#f2a7b3] animate-pulse"></span>
+    <span class="font-medium">Spring · 春</span>
+    <span class="text-white/60">in Japan</span>
+  </div>
+
+  <!-- ── Main content ───────────────────────────────────────── -->
+  <div class="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-36 lg:pb-44">
+    <!-- Eyebrow -->
+    <div class="flex items-center gap-3 mb-5">
+      <div class="h-px w-10 bg-[#c9a84c]"></div>
+      <span class="text-[#c9a84c] font-semibold text-xs uppercase tracking-[0.2em]">
+        Japan's Southern Island
+      </span>
+    </div>
+
+    <!-- Headline -->
+    <h1 class="font-serif font-bold text-hero-shadow leading-[0.95] mb-6 max-w-2xl">
+      <span class="block text-white text-[clamp(3rem,8vw,6rem)]">Discover</span>
+      <span class="block text-[#c9a84c] text-[clamp(3.5rem,10vw,7.5rem)]">Kyushu</span>
+    </h1>
+
+    <!-- Sub-text -->
+    <p class="text-white/80 text-lg md:text-xl leading-relaxed max-w-lg mb-10 text-hero-shadow">
+      Ancient hot springs, active volcanoes, samurai castles, and Japan's finest ryokan —
+      all with none of the crowds.
+    </p>
+
+    <!-- CTA row -->
+    <div class="flex flex-col xs:flex-row gap-3">
+      <a href="/destinations" class="btn-primary text-[0.95rem] py-3.5 px-7">
+        Explore Destinations
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+        </svg>
+      </a>
+      <a
+        href="/itineraries"
+        class="btn-outline text-white border-white/60 hover:bg-white/10 text-[0.95rem] py-3.5 px-7"
+      >
+        View Itineraries
+      </a>
+    </div>
+
+    <!-- Stats strip -->
+    <div class="flex items-center gap-8 mt-10">
+      {[
+        { n: '6',    label: 'Destinations' },
+        { n: '5+',   label: 'Itineraries' },
+        { n: '100+', label: 'Travel Tips' },
+      ].map((s, i) => (
+        <div class="flex items-center gap-8">
+          <div>
+            <div class="text-[1.75rem] font-serif font-bold text-[#c9a84c] leading-none">{s.n}</div>
+            <div class="text-white/50 text-[0.65rem] uppercase tracking-wider mt-1">{s.label}</div>
+          </div>
+          {i < 2 && <div class="h-8 w-px bg-white/15"></div>}
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- ── Bottom destination strip ─────────────────────────── -->
+  <div class="absolute bottom-0 left-0 right-0 z-10">
+    <div class="bg-white/10 backdrop-blur-xl border-t border-white/15">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-stretch overflow-x-auto no-scrollbar">
+          {destinations.slice(0, 5).map((d, i) => (
+            <a
+              href={`/destinations/${d.slug}`}
+              class:list={[
+                'group flex-shrink-0 flex items-center gap-3 py-4 px-5 transition-all duration-200 hover:bg-white/10 border-r border-white/10 last:border-0',
+                i === 0 ? 'pl-0' : ''
+              ]}
+            >
+              <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 ring-1 ring-white/20 group-hover:ring-[#c9a84c] transition-all">
+                <img
+                  src={`${d.image.split('?')[0]}?w=64&h=64&fit=crop&q=70`}
+                  alt={d.name}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  width="32"
+                  height="32"
+                />
+              </div>
+              <div>
+                <div class="text-white text-sm font-semibold leading-tight group-hover:text-[#c9a84c] transition-colors">
+                  {d.name}
+                </div>
+                <div class="text-white/50 text-[0.65rem]">{d.prefecture.replace(' Prefecture', '')}</div>
+              </div>
+            </a>
+          ))}
+          <a
+            href="/destinations"
+            class="flex-shrink-0 flex items-center gap-2 py-4 px-5 text-white/60 hover:text-white text-sm font-medium transition-colors hover:bg-white/10"
+          >
+            All →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-20 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-1.5" aria-hidden="true">
+    <span class="text-white/40 text-[10px] uppercase tracking-widest">Scroll</span>
+    <div class="w-px h-10 bg-gradient-to-b from-white/40 to-transparent animate-pulse"></div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     WHY KYUSHU — feature cards
+═══════════════════════════════════════════════════════════════ -->
+<section class="py-24 bg-[#faf8f3] washi-overlay">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Heading -->
+    <div class="grid lg:grid-cols-2 gap-12 items-end mb-14">
+      <div>
+        <div class="tag mb-4">Why Kyushu?</div>
+        <h2 class="section-heading">Japan Beyond<br />the Tourist Trail</h2>
+      </div>
+      <p class="section-subheading lg:text-right">
+        While most visitors flock to Tokyo and Kyoto, Kyushu rewards the curious
+        traveller with extraordinary experiences and absolutely none of the crowds.
+      </p>
+    </div>
+
+    <!-- Feature grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+      {[
+        {
+          icon: '♨️',
+          title: 'World-Class Onsen',
+          desc: "More hot springs per km² than anywhere on Earth. Beppu, Yufuin, Kurokawa — each otherworldly.",
+          color: 'from-[#bc002d]/5 to-transparent',
+          accent: '#bc002d',
+        },
+        {
+          icon: '🏯',
+          title: 'Living History',
+          desc: "Samurai castles, Dutch trading posts, Buddhist temples, and poignant atomic memory — all a train ride apart.",
+          color: 'from-[#1a2744]/5 to-transparent',
+          accent: '#1a2744',
+        },
+        {
+          icon: '🌋',
+          title: 'Raw Nature',
+          desc: "Active volcanoes, UNESCO cedar forests, turquoise rivers, and some of Japan's most dramatic hiking.",
+          color: 'from-[#8fa68e]/15 to-transparent',
+          accent: '#5a7a58',
+        },
+        {
+          icon: '🍜',
+          title: 'Incredible Food',
+          desc: "The birthplace of tonkotsu ramen. Home to Hakata mentaiko, Kagoshima wagyu, and Satsuma shochu.",
+          color: 'from-[#c9a84c]/10 to-transparent',
+          accent: '#9a7a30',
+        },
+      ].map(item => (
+        <div
+          class:list={[
+            'card-japan p-7 bg-gradient-to-b',
+            item.color
+          ]}
+        >
+          <div class="text-4xl mb-5">{item.icon}</div>
+          <h3 class="font-serif font-bold text-xl text-[#1a2744] mb-3 leading-snug">{item.title}</h3>
+          <p class="text-stone-500 text-sm leading-relaxed">{item.desc}</p>
+          <div class="mt-5 h-0.5 w-8 rounded-full" style={`background:${item.accent};opacity:0.4`}></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     DESTINATIONS — 2-up featured + grid
+═══════════════════════════════════════════════════════════════ -->
+<section class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section header -->
+    <div class="flex items-end justify-between mb-12">
+      <div>
+        <div class="tag mb-3">Top Destinations</div>
+        <h2 class="section-heading">Where to Go in Kyushu</h2>
+      </div>
+      <a href="/destinations" class="hidden sm:inline-flex items-center gap-1.5 text-[#bc002d] text-sm font-semibold hover:gap-3 transition-all group">
+        All 6 Destinations
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- Featured pair (large) + grid (small) -->
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-5 mb-5">
+      <!-- Large card 1 -->
+      <a
+        href={`/destinations/${featuredDestinations[0].slug}`}
+        class="lg:col-span-3 group relative rounded-2xl overflow-hidden shadow-md card-hover block"
+        style="aspect-ratio: 16/9;"
+      >
+        <div class="photo-frame w-full h-full absolute inset-0" data-photo-id={`dest-large-${featuredDestinations[0].slug}`}>
+          <img
+            src={`${featuredDestinations[0].image.split('?')[0]}?w=900&q=85`}
+            alt={featuredDestinations[0].name}
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            loading="lazy"
+            width="900"
+            height="506"
+          />
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0d1117]/70 via-transparent to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-6">
+          <div class="tag mb-2 bg-white/20 text-white border border-white/30 text-xs">{featuredDestinations[0].prefecture}</div>
+          <h3 class="text-white font-serif font-bold text-3xl text-hero-shadow">{featuredDestinations[0].name}</h3>
+          <p class="text-white/80 text-sm mt-1">{featuredDestinations[0].tagline}</p>
+        </div>
+      </a>
+
+      <!-- Large card 2 -->
+      <a
+        href={`/destinations/${featuredDestinations[1].slug}`}
+        class="lg:col-span-2 group relative rounded-2xl overflow-hidden shadow-md card-hover block"
+        style="aspect-ratio: 4/3;"
+      >
+        <div class="photo-frame w-full h-full absolute inset-0" data-photo-id={`dest-large-${featuredDestinations[1].slug}`}>
+          <img
+            src={`${featuredDestinations[1].image.split('?')[0]}?w=700&q=85`}
+            alt={featuredDestinations[1].name}
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            loading="lazy"
+            width="700"
+            height="525"
+          />
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0d1117]/70 via-transparent to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-6">
+          <div class="tag mb-2 bg-white/20 text-white border border-white/30 text-xs">{featuredDestinations[1].prefecture}</div>
+          <h3 class="text-white font-serif font-bold text-3xl text-hero-shadow">{featuredDestinations[1].name}</h3>
+          <p class="text-white/80 text-sm mt-1">{featuredDestinations[1].tagline}</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Smaller grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {featuredDestinations.slice(2).map(d => (
+        <DestinationCard destination={d} />
+      ))}
+      <!-- "View all" tile -->
+      <a
+        href="/destinations"
+        class="rounded-2xl border-2 border-dashed border-stone-200 flex flex-col items-center justify-center gap-3 p-8 text-center hover:border-[#bc002d] hover:bg-[#faf8f3] transition-all group min-h-[200px]"
+      >
+        <div class="w-10 h-10 rounded-full bg-stone-100 group-hover:bg-[#bc002d]/10 flex items-center justify-center transition-colors">
+          <svg class="w-5 h-5 text-stone-400 group-hover:text-[#bc002d] transition-colors" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+        </div>
+        <span class="text-sm font-semibold text-stone-500 group-hover:text-[#bc002d] transition-colors">See All 6 Destinations</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     ITINERARIES — dark section
+═══════════════════════════════════════════════════════════════ -->
+<section class="py-24 bg-[#1a2744] relative overflow-hidden">
+  <!-- Subtle pattern overlay -->
+  <div class="absolute inset-0 seigaiha-accent opacity-30 pointer-events-none"></div>
+  <!-- Gold accent line top -->
+  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c9a84c]/40 to-transparent"></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-end justify-between mb-12">
+      <div>
+        <div class="tag bg-[#c9a84c]/15 text-[#c9a84c] mb-3">Trip Planning</div>
+        <h2 class="section-heading text-white">Ready-Made Itineraries</h2>
+        <p class="section-subheading text-white/60">
+          Expert-crafted day-by-day plans. No guesswork, just great travel.
+        </p>
+      </div>
+      <a href="/itineraries" class="hidden sm:inline-flex items-center gap-1.5 text-[#c9a84c] text-sm font-semibold hover:gap-3 transition-all group">
+        All Itineraries
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+        </svg>
+      </a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {featuredItineraries.map(it => <ItineraryCard itinerary={it} />)}
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     RYOKAN — editorial feel
+═══════════════════════════════════════════════════════════════ -->
+<section class="py-24 bg-[#faf8f3] washi-overlay">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section header with JP accent -->
+    <div class="flex items-start gap-6 mb-12">
+      <div class="hidden md:block">
+        <span class="jp-vertical text-[#bc002d]/20 text-6xl font-bold select-none" aria-hidden="true">旅館</span>
+      </div>
+      <div class="flex-1">
+        <div class="flex items-end justify-between">
+          <div>
+            <div class="tag mb-3">Where to Stay</div>
+            <h2 class="section-heading">Best Ryokan in Kyushu</h2>
+            <p class="section-subheading">
+              Hand-picked traditional inns — from intimate forest retreats to celebrated luxury.
+            </p>
+          </div>
+          <a href="/ryokan" class="hidden sm:inline-flex items-center gap-1.5 text-[#bc002d] text-sm font-semibold hover:gap-3 transition-all group flex-shrink-0 ml-8">
+            All Ryokan
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {featuredRyokans.map(r => <RyokanCard ryokan={r} />)}
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     AFFILIATE BANNERS
+═══════════════════════════════════════════════════════════════ -->
+<section class="py-14 bg-white border-y border-stone-100">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <AffiliateBox type="booking" url="https://www.booking.com/affiliate/kyushu-explorer" />
+      <AffiliateBox type="klook"   url="https://www.klook.com/affiliate/kyushu-explorer" />
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     BLOG — asymmetric editorial layout
+═══════════════════════════════════════════════════════════════ -->
+<section class="py-24 bg-[#faf8f3]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-end justify-between mb-12">
+      <div>
+        <div class="tag mb-3">Travel Blog</div>
+        <h2 class="section-heading">From the Blog</h2>
+      </div>
+      <a href="/blog" class="hidden sm:inline-flex items-center gap-1.5 text-[#bc002d] text-sm font-semibold hover:gap-3 transition-all group">
+        All Articles
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- Featured (large) -->
+    <div class="mb-6">
+      {featuredBlogPosts.slice(0, 1).map(p => <BlogCard post={p} featured={true} />)}
+    </div>
+
+    <!-- Secondary row -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      {featuredBlogPosts.slice(1, 3).map(p => <BlogCard post={p} />)}
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FINAL CTA — Japan red with texture
+═══════════════════════════════════════════════════════════════ -->
+<section class="relative py-24 bg-[#bc002d] overflow-hidden">
+  <!-- Decorative circles -->
+  <div class="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-white/5 -translate-y-1/2 translate-x-1/4 pointer-events-none"></div>
+  <div class="absolute bottom-0 left-0 w-72 h-72 rounded-full bg-white/5 translate-y-1/2 -translate-x-1/4 pointer-events-none"></div>
+  <!-- Gold accent lines -->
+  <div class="absolute top-0 left-0 right-0 h-px bg-[#c9a84c]/30 pointer-events-none"></div>
+  <div class="absolute bottom-0 left-0 right-0 h-px bg-[#c9a84c]/30 pointer-events-none"></div>
+
+  <!-- JP vertical text decoration -->
+  <div class="absolute left-12 top-1/2 -translate-y-1/2 hidden xl:block" aria-hidden="true">
+    <span class="jp-vertical text-white/10 text-7xl font-bold select-none">旅に出よう</span>
+  </div>
+
+  <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-white/80 text-xs font-semibold uppercase tracking-widest mb-6">
+      Start Planning
+    </div>
+    <h2 class="font-serif font-bold text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-5">
+      Ready to Discover<br />Kyushu?
+    </h2>
+    <p class="text-white/80 text-lg leading-relaxed mb-10 max-w-lg mx-auto">
+      Free destination guides, curated itineraries, and honest ryokan picks —
+      everything you need for an unforgettable Japan trip.
+    </p>
+    <div class="flex flex-col xs:flex-row gap-4 justify-center">
+      <a
+        href="/itineraries"
+        class="btn-primary bg-white text-[#bc002d] hover:bg-[#faf8f3] shadow-xl text-base py-4 px-8"
+      >
+        Browse Itineraries
+      </a>
+      <a
+        href="/destinations"
+        class="btn-outline text-white border-white/60 hover:bg-white/10 text-base py-4 px-8"
+      >
+        Explore Destinations
+      </a>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>

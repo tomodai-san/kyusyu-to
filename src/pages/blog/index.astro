@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { blogPosts } from '../../data/blogPosts';
+
+const categories = ['All', ...new Set(blogPosts.map(p => p.category))];
+const featuredPost = blogPosts.find(p => p.featured);
+const otherPosts = blogPosts.filter(p => p !== featuredPost);
+---
+
+<BaseLayout
+  title="Kyushu Travel Blog — Tips, Guides & Insider Knowledge"
+  description="Expert travel articles about Kyushu, Japan. Practical tips, destination guides, ryokan etiquette, seasonal advice, and foodie recommendations from experienced travellers."
+>
+  <!-- Header -->
+  <section class="bg-[#1a2744] py-24 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-15">
+      <img src="https://images.unsplash.com/photo-1607619662634-3ac55ec0e216?w=1600&q=80" alt="" class="w-full h-full object-cover" />
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="tag bg-white/10 text-[#c9a84c] mb-4 inline-block">Travel Blog</div>
+      <h1 class="font-serif font-bold text-5xl md:text-6xl text-white mb-4">Kyushu Travel Blog</h1>
+      <p class="text-white/70 text-lg max-w-2xl mx-auto">
+        Practical guides, insider tips, and inspiration for planning your perfect Kyushu trip.
+      </p>
+    </div>
+  </section>
+
+  <!-- Category Filter Bar -->
+  <section class="bg-white border-b border-stone-200 sticky top-16 lg:top-20 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center gap-2 overflow-x-auto py-4 no-scrollbar">
+        {categories.map(cat => (
+          <button
+            class="flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap category-btn"
+            data-category={cat}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Content -->
+  <section class="py-16 bg-[#faf8f3]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Featured Post -->
+      {featuredPost && (
+        <div class="mb-12">
+          <h2 class="font-serif font-bold text-2xl text-[#1a2744] mb-6">Featured</h2>
+          <BlogCard post={featuredPost} featured={true} />
+        </div>
+      )}
+
+      <!-- All Posts Grid -->
+      <h2 class="font-serif font-bold text-2xl text-[#1a2744] mb-6">All Articles</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="blog-grid">
+        {blogPosts.map(p => (
+          <div class="blog-post-item" data-category={p.category}>
+            <BlogCard post={p} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+
+<script>
+  const btns = document.querySelectorAll<HTMLButtonElement>('.category-btn');
+  const items = document.querySelectorAll<HTMLElement>('.blog-post-item');
+
+  function setActive(cat: string) {
+    btns.forEach(b => {
+      const active = b.dataset.category === cat;
+      b.classList.toggle('bg-[#bc002d]', active);
+      b.classList.toggle('text-white', active);
+      b.classList.toggle('bg-stone-100', !active);
+      b.classList.toggle('text-stone-700', !active);
+    });
+    items.forEach(item => {
+      const show = cat === 'All' || item.dataset.category === cat;
+      item.style.display = show ? '' : 'none';
+    });
+  }
+
+  setActive('All');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => setActive(btn.dataset.category ?? 'All'));
+  });
+</script>

@@ -1,0 +1,210 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AffiliateBox from '../../components/AffiliateBox.astro';
+import ItineraryCard from '../../components/ItineraryCard.astro';
+import { itineraries } from '../../data/itineraries';
+
+export function getStaticPaths() {
+  return itineraries.map(i => ({ params: { slug: i.slug }, props: { itinerary: i } }));
+}
+
+const { itinerary: it } = Astro.props;
+const related = itineraries.filter(i => i.slug !== it.slug).slice(0, 2);
+
+const difficultyColor: Record<string, string> = {
+  Easy: 'text-green-700 bg-green-100',
+  Moderate: 'text-amber-700 bg-amber-100',
+  Active: 'text-red-700 bg-red-100',
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "TouristTrip",
+  "name": it.title,
+  "description": it.description,
+  "image": it.image,
+  "itinerary": {
+    "@type": "ItemList",
+    "itemListElement": it.route.map((stop, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": stop
+    }))
+  }
+};
+---
+
+<BaseLayout
+  title={`${it.title} — ${it.duration} Kyushu Itinerary`}
+  description={`${it.title}: A ${it.days}-day Kyushu itinerary. ${it.description.slice(0, 130)}...`}
+  image={it.image}
+  type="article"
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="relative h-[55vh] min-h-[400px] flex items-end" data-hero-page>
+    <div class="absolute inset-0 z-0">
+      <img src={it.image} alt={it.title} class="w-full h-full object-cover" width="1200" height="600" />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#1a2744] via-[#1a2744]/40 to-transparent"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 w-full">
+      <nav class="flex items-center gap-2 text-white/60 text-sm mb-4">
+        <a href="/" class="hover:text-white">Home</a>
+        <span>/</span>
+        <a href="/itineraries" class="hover:text-white">Itineraries</a>
+        <span>/</span>
+        <span class="text-white">{it.title}</span>
+      </nav>
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        <span class="bg-[#bc002d] text-white text-xs font-semibold px-3 py-1 rounded-full">{it.duration}</span>
+        <span class:list={['text-xs font-semibold px-3 py-1 rounded-full', difficultyColor[it.difficulty]]}>{it.difficulty}</span>
+        <span class="bg-[#c9a84c] text-white text-xs font-semibold px-3 py-1 rounded-full">{it.theme}</span>
+      </div>
+      <h1 class="font-serif font-bold text-4xl md:text-5xl text-white leading-tight mb-2">{it.title}</h1>
+      <p class="text-white/80 text-lg">{it.tagline}</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-12">
+
+        <!-- Article -->
+        <div class="lg:col-span-2">
+          <!-- Overview -->
+          <div class="bg-[#faf8f3] rounded-2xl p-7 mb-10">
+            <h2 class="font-serif font-bold text-2xl text-[#1a2744] mb-4">Itinerary Overview</h2>
+            <p class="text-stone-600 leading-relaxed mb-6">{it.description}</p>
+            <div class="grid sm:grid-cols-3 gap-4">
+              <div class="text-center bg-white rounded-xl p-4 shadow-sm">
+                <div class="text-2xl font-serif font-bold text-[#bc002d]">{it.days}</div>
+                <div class="text-xs text-stone-500 mt-1">Days</div>
+              </div>
+              <div class="text-center bg-white rounded-xl p-4 shadow-sm">
+                <div class="text-lg font-bold text-[#1a2744]">{it.difficulty}</div>
+                <div class="text-xs text-stone-500 mt-1">Difficulty</div>
+              </div>
+              <div class="text-center bg-white rounded-xl p-4 shadow-sm">
+                <div class="text-base font-bold text-[#1a2744]">{it.estimatedCost}</div>
+                <div class="text-xs text-stone-500 mt-1">Est. Cost / Person</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Route -->
+          <div class="mb-10">
+            <h2 class="font-serif font-bold text-2xl text-[#1a2744] mb-5">The Route</h2>
+            <div class="flex flex-col gap-0">
+              {it.route.map((stop, i) => (
+                <div class="flex items-center gap-4">
+                  <div class="flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full bg-[#bc002d] flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                      {i + 1}
+                    </div>
+                    {i < it.route.length - 1 && <div class="w-0.5 h-8 bg-stone-200"></div>}
+                  </div>
+                  <div class:list={['py-2 font-medium', i === 0 || i === it.route.length - 1 ? 'text-[#1a2744] font-semibold' : 'text-stone-600']}>
+                    {stop}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Highlights -->
+          <div class="mb-10">
+            <h2 class="font-serif font-bold text-2xl text-[#1a2744] mb-5">Trip Highlights</h2>
+            <div class="grid sm:grid-cols-2 gap-3">
+              {it.highlights.map(h => (
+                <div class="flex items-start gap-3 bg-[#faf8f3] rounded-xl p-4">
+                  <span class="text-[#bc002d] font-bold text-lg flex-shrink-0">★</span>
+                  <span class="text-stone-700 text-sm font-medium">{h}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Day-by-day sample -->
+          <div class="mb-10">
+            <h2 class="font-serif font-bold text-2xl text-[#1a2744] mb-5">Sample Day-by-Day Plan</h2>
+            <div class="space-y-6">
+              {it.route.slice(0, Math.min(it.days, 4)).map((stop, i) => (
+                <div class="border-l-4 border-[#bc002d] pl-5">
+                  <h3 class="font-serif font-bold text-lg text-[#1a2744]">Day {i + 1}: {stop}</h3>
+                  <p class="text-stone-600 text-sm mt-2 leading-relaxed">
+                    Spend the day exploring {stop}'s main attractions. Start the morning at the most visited landmark, enjoy local cuisine for lunch, and spend the afternoon at your leisure — either exploring more sights or relaxing at your accommodation. Evening is the perfect time for a traditional kaiseki dinner.
+                  </p>
+                </div>
+              ))}
+              {it.days > 4 && (
+                <div class="bg-[#faf8f3] rounded-xl p-5 text-center">
+                  <p class="text-stone-500 text-sm">
+                    <strong>{it.days - 4} more day{it.days - 4 > 1 ? 's' : ''}</strong> continuing the route above...
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <!-- Affiliate -->
+          <AffiliateBox
+            type="booking"
+            url="https://www.booking.com/affiliate/kyushu-explorer"
+            title="Book Accommodation Along This Route"
+            description="Find hotels and ryokan in every stop on this itinerary."
+          />
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="space-y-6">
+          <!-- Trip Info Card -->
+          <div class="bg-[#faf8f3] rounded-2xl p-6 sticky top-24">
+            <h3 class="font-serif font-bold text-xl text-[#1a2744] mb-5">Trip Details</h3>
+            <dl class="space-y-4">
+              {[
+                { label: 'Duration', value: it.duration },
+                { label: 'Difficulty', value: it.difficulty },
+                { label: 'Theme', value: it.theme },
+                { label: 'Est. Cost', value: it.estimatedCost },
+              ].map(f => (
+                <div>
+                  <dt class="text-xs font-semibold uppercase tracking-wider text-stone-400">{f.label}</dt>
+                  <dd class="font-semibold text-[#1a2744] mt-0.5">{f.value}</dd>
+                </div>
+              ))}
+              <div>
+                <dt class="text-xs font-semibold uppercase tracking-wider text-stone-400 mb-2">Best For</dt>
+                <dd class="flex flex-wrap gap-1.5">
+                  {it.bestFor.map(b => (
+                    <span class="text-xs bg-[#bc002d]/10 text-[#bc002d] px-2.5 py-1 rounded-full font-medium">{b}</span>
+                  ))}
+                </dd>
+              </div>
+            </dl>
+            <div class="mt-6 space-y-3">
+              <AffiliateBox
+                type="klook"
+                url="https://www.klook.com/affiliate/kyushu-explorer"
+                title="Book Your Rail Pass"
+                description="JR Kyushu Pass covers all trains on this route."
+              />
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Itineraries -->
+  {related.length > 0 && (
+    <section class="py-14 bg-[#faf8f3]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="font-serif font-bold text-2xl text-[#1a2744] mb-6">More Itineraries</h2>
+        <div class="grid sm:grid-cols-2 gap-6">
+          {related.map(i => <ItineraryCard itinerary={i} />)}
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>
