@@ -1,0 +1,342 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AffiliateBox from '../components/AffiliateBox.astro';
+
+const shrines = [
+  {
+    name: "Yutoku Inari Shrine",
+    nameJp: "祐徳稲荷神社",
+    location: "Kashima City",
+    rank: "One of Japan's Top 3 Inari Shrines",
+    description:
+      "Built into the face of a steep forested cliff, Yutoku Inari is Kyushu's answer to Fushimi Inari — and arguably more dramatic. Its vermillion corridors climb 120 metres above the valley floor, and the main hall juts out over the cliff edge on a framework of wooden stilts. Over 3 million visitors come each year to pray for business success and good fortune.",
+    highlights: [
+      "Cliff-top main hall with breathtaking valley views",
+      "Thousands of miniature torii donations lining the paths",
+      "Inner sanctuary reachable by steep forested trail",
+      "Best visited at dawn before the crowds arrive",
+    ],
+    access: "20-min bus from Hizen-Kashima Station (JR Nagasaki Line); 1h from Fukuoka by train",
+    hours: "Open daily, 24 hours (grounds); shrine offices 8:30–17:00",
+    admission: "Free (inner precincts); ¥200 cable car optional",
+    image: "https://images.unsplash.com/photo-1771517713631-ebd30c357f27?w=900&q=85",
+    imageAlt: "Vermillion shrine building with traditional tiled roof",
+    tag: "Must Visit",
+    tagColor: "bg-[#bc002d]",
+  },
+  {
+    name: "Takeo Shrine",
+    nameJp: "武雄神社",
+    location: "Takeo City",
+    rank: "3,000-Year-Old Sacred Camphor Tree",
+    description:
+      "The centrepiece of Takeo Shrine is not its architecture but a single tree: a camphor (楠) that has stood here for more than three millennia, its trunk so immense that a cave shrine to the deity of longevity is housed inside it. The hollow is large enough to walk through. Nearby Takeo Onsen hot springs make this an easy half-day pairing.",
+    highlights: [
+      "Walk through the 3,000-year-old camphor tree hollow",
+      "Cave shrine (洞窟神社) carved inside the living trunk",
+      "Combine with Takeo Onsen public bath next door",
+      "Beautiful stone torii and ancient-growth forest",
+    ],
+    access: "10-min walk from Takeo Onsen Station; 50-min from Fukuoka (Hakata) by Kamome limited express",
+    hours: "Open daily, dawn to dusk",
+    admission: "Free",
+    image: "https://images.unsplash.com/photo-1751560373545-fe383edbd83c?w=900&q=85",
+    imageAlt: "Large ancient tree beside a traditional Japanese structure",
+    tag: "Hidden Gem",
+    tagColor: "bg-[#1a2744]",
+  },
+  {
+    name: "Karatsu Shrine",
+    nameJp: "唐津神社",
+    location: "Karatsu City",
+    rank: "Home of the Karatsu Kunchi Festival",
+    description:
+      "Karatsu Shrine is the spiritual heart of Karatsu City, and for three days each November it becomes the stage for the Karatsu Kunchi — one of Japan's most spectacular festivals. Fourteen enormous floats (hikiyama), some towering five metres high and shaped as sea bream, dragons, and kabuto helmets, are pulled through the streets by hundreds of local volunteers. The festival is a nationally designated Important Intangible Folk Cultural Property.",
+    highlights: [
+      "Karatsu Kunchi Festival (Nov 2–4) — don't miss it",
+      "14 hikiyama floats on permanent display at the nearby Hikiyama Exhibition Hall",
+      "Shrine gate overlooks the historic Karatsu Castle and bay",
+      "5-minute walk from Karatsu Castle",
+    ],
+    access: "5-min walk from Karatsu Station; 1h from Fukuoka (Hakata) by Midori/Karatsu limited express",
+    hours: "Open daily, 9:00–17:00",
+    admission: "Free (Hikiyama Exhibition Hall: ¥500)",
+    image: "https://images.unsplash.com/photo-1698790831806-ba3d6ce21c0b?w=900&q=85",
+    imageAlt: "Red torii gates at a Japanese shrine",
+    tag: "Festival Highlight",
+    tagColor: "bg-[#c9a84c] text-[#1a2744]",
+  },
+  {
+    name: "Yoka Shrine",
+    nameJp: "与賀神社",
+    location: "Saga City",
+    rank: "Saga City's Oldest Shrine",
+    description:
+      "Founded over 1,200 years ago in the heart of Saga City, Yoka Shrine is framed by a majestic avenue of ancient camphor trees whose roots have cracked the stone paving over centuries. The atmosphere is tranquil and deeply local — you are far more likely to encounter residents quietly praying here than tourist groups. A perfect spot to absorb everyday Japanese shrine culture.",
+    highlights: [
+      "1,200-year-old camphor tree avenue",
+      "Peaceful atmosphere — very few foreign tourists",
+      "Evening illuminations on special dates",
+      "10-min walk from central Saga Station",
+    ],
+    access: "10-min walk or 5-min bicycle from JR Saga Station",
+    hours: "Open daily, dawn to dusk",
+    admission: "Free",
+    image: "https://images.unsplash.com/photo-1771517713047-96bf79012ca6?w=900&q=85",
+    imageAlt: "Traditional Japanese shrine with stone lanterns and trees",
+    tag: "Local Favourite",
+    tagColor: "bg-stone-600",
+  },
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Sacred Saga: A Guide to the Prefecture's Most Revered Shrines",
+  "description": "Discover Saga's most sacred shrines — from the cliff-top grandeur of Yutoku Inari to the 3,000-year-old camphor tree of Takeo Shrine.",
+  "image": "https://images.unsplash.com/photo-1749642969542-fa9d69f417cb?w=1200&q=80",
+  "author": { "@type": "Organization", "name": "Kyushu Explorer" },
+  "publisher": { "@type": "Organization", "name": "Kyushu Explorer", "url": "https://realkyushu.com" },
+  "url": "https://realkyushu.com/saga-shrines",
+  "about": {
+    "@type": "TouristDestination",
+    "name": "Saga Prefecture",
+    "description": "Saga Prefecture, Kyushu, Japan — shrine and cultural tourism guide",
+  },
+};
+---
+
+<BaseLayout
+  title="Sacred Saga: A Guide to the Prefecture's Finest Shrines"
+  description="Discover Saga's most revered shrines — from the cliff-top grandeur of Yutoku Inari (one of Japan's top 3 Inari shrines) to the 3,000-year-old camphor tree of Takeo. Plus the Karatsu Kunchi festival shrine."
+  image="https://images.unsplash.com/photo-1749642969542-fa9d69f417cb?w=1200&q=80"
+  type="article"
+  schema={schema}
+>
+
+  <!-- Hero -->
+  <section class="relative h-[70vh] min-h-[480px] flex items-end" data-hero-page>
+    <div class="absolute inset-0 z-0">
+      <img
+        src="https://images.unsplash.com/photo-1749642969542-fa9d69f417cb?w=1920&q=85"
+        alt="Orange torii gates lining a stairway at a Japanese shrine"
+        class="w-full h-full object-cover"
+        width="1920"
+        height="1080"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#1a2744] via-[#1a2744]/40 to-transparent"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 w-full">
+      <nav class="flex items-center gap-2 text-white/60 text-sm mb-6">
+        <a href="/" class="hover:text-white transition-colors">Home</a>
+        <span>/</span>
+        <a href="/destinations/saga" class="hover:text-white transition-colors">Saga</a>
+        <span>/</span>
+        <span class="text-white">Shrine Guide</span>
+      </nav>
+      <div class="tag mb-3 bg-white/20 text-white border border-white/30">Sacred Saga</div>
+      <h1 class="font-serif font-bold text-5xl md:text-6xl text-white mb-4 max-w-3xl leading-tight">
+        The Shrines of Saga
+      </h1>
+      <p class="text-[#c9a84c] text-xl font-medium max-w-2xl">
+        Cliff-top Inari sanctuaries, 3,000-year-old sacred trees, and festival floats that draw millions — Saga's shrines are among Kyushu's best-kept secrets.
+      </p>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose-japan">
+        <p class="lead text-xl text-stone-600 leading-relaxed">
+          Saga Prefecture may not top most visitors' Japan itineraries, but for those who seek authentic spiritual landscapes away from the Kyoto crowds, it delivers something rare: ancient shrine complexes where the atmosphere of devotion has barely changed in a thousand years.
+        </p>
+        <p>
+          The prefecture is home to one of Japan's top three Inari shrines, a sacred camphor tree older than the Norman Conquest, and the stage for a nationally designated festival that has been performed without interruption for over 500 years. Best of all, you can visit these places on a day trip from Fukuoka — or build them into a weekend of onsen and pottery exploration.
+        </p>
+      </div>
+
+      <!-- Quick nav chips -->
+      <div class="flex flex-wrap gap-3 mt-8">
+        {shrines.map(s => (
+          <a
+            href={`#${s.nameJp}`}
+            class="px-4 py-2 rounded-full bg-[#faf8f3] border border-stone-200 text-sm font-medium text-[#1a2744] hover:bg-[#1a2744] hover:text-white transition-colors"
+          >
+            {s.name}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Shrines -->
+  <section class="py-4 bg-[#faf8f3]">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20 py-16">
+      {shrines.map((shrine, i) => (
+        <article id={shrine.nameJp} class="scroll-mt-8">
+          <div class={`grid md:grid-cols-2 gap-10 items-start ${i % 2 === 1 ? 'md:grid-flow-dense' : ''}`}>
+            <!-- Image -->
+            <div class={`relative ${i % 2 === 1 ? 'md:col-start-2' : ''}`}>
+              <div class="relative overflow-hidden rounded-2xl aspect-[4/3] shadow-xl">
+                <img
+                  src={shrine.image}
+                  alt={shrine.imageAlt}
+                  class="w-full h-full object-cover"
+                  width="900"
+                  height="675"
+                  loading="lazy"
+                />
+                <span class={`absolute top-4 left-4 ${shrine.tagColor} text-white text-xs font-semibold px-3 py-1 rounded-full`}>
+                  {shrine.tag}
+                </span>
+              </div>
+            </div>
+
+            <!-- Content -->
+            <div class={`space-y-5 ${i % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}`}>
+              <div>
+                <p class="text-[#bc002d] text-sm font-semibold uppercase tracking-wider mb-1">{shrine.rank}</p>
+                <h2 class="font-serif font-bold text-3xl text-[#1a2744] leading-tight">
+                  {shrine.name}
+                  <span class="block text-lg font-normal text-stone-500 mt-1">{shrine.nameJp} — {shrine.location}</span>
+                </h2>
+              </div>
+
+              <p class="text-stone-600 leading-relaxed">{shrine.description}</p>
+
+              <ul class="space-y-2">
+                {shrine.highlights.map(h => (
+                  <li class="flex items-start gap-2 text-sm text-stone-600">
+                    <span class="text-[#c9a84c] font-bold mt-0.5 flex-shrink-0">→</span>
+                    {h}
+                  </li>
+                ))}
+              </ul>
+
+              <!-- Practical info -->
+              <div class="bg-white rounded-xl p-4 border border-stone-200 space-y-2 text-sm">
+                <div class="flex gap-2">
+                  <span class="text-stone-400 w-20 flex-shrink-0">Access</span>
+                  <span class="text-stone-700">{shrine.access}</span>
+                </div>
+                <div class="flex gap-2">
+                  <span class="text-stone-400 w-20 flex-shrink-0">Hours</span>
+                  <span class="text-stone-700">{shrine.hours}</span>
+                </div>
+                <div class="flex gap-2">
+                  <span class="text-stone-400 w-20 flex-shrink-0">Admission</span>
+                  <span class="text-stone-700">{shrine.admission}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Visitor Tips -->
+  <section class="py-16 bg-[#1a2744] text-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-12 items-start">
+        <div>
+          <div class="tag bg-white/10 text-[#c9a84c] mb-4 inline-block">Before You Go</div>
+          <h2 class="font-serif font-bold text-3xl mb-6">Shrine Etiquette & Tips</h2>
+          <ul class="space-y-4 text-white/80">
+            {[
+              { icon: "🚿", tip: "Purify your hands at the temizuya (water basin) before approaching the main hall — rinse left hand, then right, then mouth." },
+              { icon: "🎋", tip: "Bow twice, clap twice, make your silent wish, bow once more — this is the standard Shinto prayer sequence." },
+              { icon: "📷", tip: "Photography is generally welcome in grounds and approaches, but always check for signs before photographing inside inner sanctuaries." },
+              { icon: "👟", tip: "Wear comfortable shoes — Yutoku Inari's cliff trail involves several hundred steps." },
+              { icon: "⏰", tip: "Arrive early for Yutoku Inari (before 9am) to experience the cliff path in mist before tour groups arrive." },
+            ].map(item => (
+              <li class="flex gap-3">
+                <span class="text-xl flex-shrink-0">{item.icon}</span>
+                <span class="text-sm leading-relaxed">{item.tip}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="space-y-5">
+          <div class="tag bg-white/10 text-[#c9a84c] inline-block">Day Trip Route</div>
+          <h2 class="font-serif font-bold text-3xl mb-4">Suggested 1-Day Itinerary</h2>
+          <ol class="space-y-4">
+            {[
+              { time: "8:30", desc: "Depart Fukuoka (Hakata). Take Kamome limited express to Takeo Onsen (50 min)." },
+              { time: "9:30", desc: "Takeo Shrine & ancient camphor tree. Combine with Takeo Onsen bath." },
+              { time: "12:00", desc: "Train to Hizen-Kashima (45 min) → bus to Yutoku Inari Shrine." },
+              { time: "13:00", desc: "Explore Yutoku Inari — climb to the cliff-top inner sanctuary." },
+              { time: "15:30", desc: "Train to Karatsu (1h). Walk to Karatsu Shrine and Hikiyama Hall." },
+              { time: "17:30", desc: "Karatsu Castle at sunset. Dinner of Karatsu sea urchin rice." },
+              { time: "19:30", desc: "Return to Fukuoka (1h by limited express)." },
+            ].map(step => (
+              <li class="flex gap-4 text-sm">
+                <span class="text-[#c9a84c] font-semibold w-12 flex-shrink-0 pt-0.5">{step.time}</span>
+                <span class="text-white/80 leading-relaxed">{step.desc}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hero image accent -->
+  <section class="relative h-64 overflow-hidden">
+    <img
+      src="https://images.unsplash.com/photo-1774715615229-186534628548?w=1600&q=80"
+      alt="Red torii gate at shrine entrance"
+      class="w-full h-full object-cover object-center"
+      width="1600"
+      height="400"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-[#1a2744]/50 flex items-center justify-center">
+      <div class="text-center text-white">
+        <p class="font-serif text-3xl font-bold mb-2">Plan Your Saga Shrine Journey</p>
+        <p class="text-white/70">Stay the night and discover what the day-trippers miss.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Affiliate -->
+  <section class="py-16 bg-[#faf8f3]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      <AffiliateBox
+        type="booking"
+        url="https://www.booking.com/affiliate/kyushu-explorer"
+        title="Where to Stay in Saga"
+        description="Karatsu has excellent seaside hotels; Takeo has charming onsen ryokan. Most properties include free cancellation."
+      />
+      <AffiliateBox
+        type="klook"
+        url="https://affiliate.klook.com/redirect?aid=119974&aff_adid=1266564&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2F"
+        title="Saga Day Tours from Fukuoka"
+        description="Guided shrine tours, Arita pottery workshops, and Karatsu sea urchin experiences."
+      />
+    </div>
+  </section>
+
+  <!-- Related links -->
+  <section class="py-12 bg-white border-t border-stone-100">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h3 class="font-serif font-bold text-xl text-[#1a2744] mb-6">Explore More of Saga</h3>
+      <div class="flex flex-wrap gap-4">
+        <a href="/destinations/saga" class="card-japan p-4 flex-1 min-w-[180px] hover:shadow-md transition-shadow">
+          <p class="text-xs text-[#bc002d] font-semibold uppercase tracking-wider mb-1">Destination Guide</p>
+          <p class="font-serif font-bold text-[#1a2744]">Saga Overview →</p>
+        </a>
+        <a href="/destinations/fukuoka" class="card-japan p-4 flex-1 min-w-[180px] hover:shadow-md transition-shadow">
+          <p class="text-xs text-stone-500 uppercase tracking-wider mb-1">Nearby</p>
+          <p class="font-serif font-bold text-[#1a2744]">Fukuoka Guide →</p>
+        </a>
+        <a href="/itineraries" class="card-japan p-4 flex-1 min-w-[180px] hover:shadow-md transition-shadow">
+          <p class="text-xs text-stone-500 uppercase tracking-wider mb-1">Plan Your Trip</p>
+          <p class="font-serif font-bold text-[#1a2744]">Kyushu Itineraries →</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
