@@ -132,4 +132,84 @@ export const destinations: Destination[] = [
     travelTime: "1.5h from Fukuoka by Yufuin no Mori train",
     featured: false,
   },
+  {
+    slug: "saga",
+    name: "Saga",
+    prefecture: "Saga Prefecture",
+    tagline: "Ceramics, Castles & the World's Largest Balloon Fiesta",
+    description:
+      "Saga is Kyushu's quiet achiever — birthplace of Japanese porcelain (Arita and Imari ware), home to the fairytale Karatsu Castle perched above the sea, and host to the Saga International Balloon Fiesta, one of the world's largest hot-air balloon events held each November.",
+    image:
+      "https://images.unsplash.com/photo-1577202282409-ce39d1304996?w=1200&q=80",
+    highlights: [
+      "Saga International Balloon Fiesta",
+      "Karatsu Castle",
+      "Arita & Imari pottery villages",
+      "Yoshinogari Historical Park",
+      "Ariake Sea mud flat tours",
+    ],
+    bestTime: "November (Balloon Fiesta), March–April",
+    travelTime: "1h from Fukuoka by train",
+    featured: false,
+  },
+  {
+    slug: "oita",
+    name: "Oita",
+    prefecture: "Oita Prefecture",
+    tagline: "Stone Buddhas, Castle Towns & Hidden Highland Gems",
+    description:
+      "Beyond Beppu's steaming hells and Yufuin's misty valleys, Oita Prefecture hides remarkable treasures: 59 National Treasure stone Buddha carvings at Usuki, the beautifully preserved castle town of Kitsuki, and ancient Buddhist temples scattered across the mystical Kunisaki Peninsula.",
+    image:
+      "https://images.unsplash.com/photo-1627669487757-907486fc1222?w=1200&q=80",
+    highlights: [
+      "Usuki Stone Buddhas (National Treasure)",
+      "Kitsuki castle town",
+      "Kunisaki Peninsula temples",
+      "Nakatsu Castle",
+      "Highland hiking and waterfalls",
+    ],
+    bestTime: "Spring and autumn",
+    travelTime: "2.5h from Fukuoka by limited express",
+    featured: false,
+  },
+  {
+    slug: "miyazaki",
+    name: "Miyazaki",
+    prefecture: "Miyazaki Prefecture",
+    tagline: "Subtropical Coast, Ancient Myths & Wild Nature",
+    description:
+      "Where Japan's gods are said to have descended from heaven, Miyazaki dazzles with the jungle gorge of Takachiho, Aoshima's ocean torii gate surrounded by wave-carved rocks, and the wild Nichinan coastline. It is Kyushu's sunniest and most subtropical destination.",
+    image:
+      "https://images.unsplash.com/photo-1698794638761-81d07e76de60?w=1200&q=80",
+    highlights: [
+      "Takachiho Gorge & rowing boats",
+      "Aoshima Island torii gate",
+      "Nichinan Coastline",
+      "Kirishima-Kinkowan National Park",
+      "Udo Shrine (sea-cliff cave)",
+    ],
+    bestTime: "April–June, October–November",
+    travelTime: "1.5h from Fukuoka by plane, 3h by train",
+    featured: false,
+  },
+  {
+    slug: "aso",
+    name: "Mount Aso",
+    prefecture: "Kumamoto Prefecture",
+    tagline: "Japan's Largest Active Volcano & Infinite Caldera",
+    description:
+      "Mt. Aso's outer caldera is so vast it contains an entire inhabited town of 50,000 people. Hike the smouldering Nakadake crater rim, gallop across Kusasenri's grassy plains, and end the day soaking in Kurokawa Onsen — Japan's most atmospheric hot spring village.",
+    image:
+      "https://images.unsplash.com/photo-1698879434759-0a54b36a3233?w=1200&q=80",
+    highlights: [
+      "Nakadake active crater rim",
+      "Kusasenri grassland plateau",
+      "Daikanbo panoramic lookout",
+      "Aso Volcano Museum",
+      "Kurokawa Onsen village",
+    ],
+    bestTime: "May–June, October–November",
+    travelTime: "1.5h from Kumamoto by bus",
+    featured: false,
+  },
 ];
