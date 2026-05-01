@@ -1,4 +1,4 @@
-export interface BlogPost {
+﻿export interface BlogPost {
   slug: string;
   title: string;
   excerpt: string;
@@ -18,7 +18,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Cherry blossoms in April, fireflies in June, autumn foliage in November — Kyushu has something spectacular every season. Here's exactly when to go based on what you want to experience.",
     image:
-      "https://images.unsplash.com/photo-1614016957547-ceba73462f37?w=800&q=80",
+      "https://images.unsplash.com/photo-1698879434759-0a54b36a3233?w=800&q=80",
     author: "Sarah Mitchell",
     date: "2026-03-15",
     readTime: "8 min read",
@@ -32,7 +32,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "From a blood-red boiling pool to a pond where crocodiles bathe in geothermal water — Beppu's famous 'Jigoku Meguri' hell circuit is one of Japan's most unique attractions. Here's everything you need to know.",
     image:
-      "https://images.unsplash.com/photo-1601823984263-b87b59798b70?w=800&q=80",
+      "https://images.unsplash.com/photo-1752917870379-ed88be3c2050?w=800&q=80",
     author: "James Okafor",
     date: "2026-02-28",
     readTime: "10 min read",
@@ -46,7 +46,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "The emerald-green Yufuin no Mori limited express is one of Japan's most beloved scenic trains. Here's why this 90-minute ride through forested mountains is worth booking months in advance.",
     image:
-      "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80",
+      "https://images.unsplash.com/photo-1774156702321-85b8073ddce8?w=800&q=80",
     author: "Emily Chen",
     date: "2026-01-20",
     readTime: "6 min read",
@@ -60,7 +60,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "First-time ryokan guests often feel unsure about etiquette: when to wear yukata, how to behave in communal baths, what a kaiseki meal involves. This guide covers everything so you can relax and enjoy.",
     image:
-      "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800&q=80",
+      "https://images.unsplash.com/photo-1759310708340-90eba93e94e4?w=800&q=80",
     author: "Sarah Mitchell",
     date: "2025-12-10",
     readTime: "12 min read",
@@ -74,7 +74,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Fukuoka is arguably Japan's best food city. From the original tonkotsu ramen at midnight yatai stalls to fresh oysters at Yanagibashi Market, here are 15 dishes you absolutely must eat.",
     image:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+      "https://images.unsplash.com/photo-1605088298038-2876387a80c1?w=800&q=80",
     author: "Kenji Nakamura",
     date: "2025-11-05",
     readTime: "9 min read",
@@ -88,7 +88,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Ancient cedar trees thousands of years old, cloud-shrouded mountain peaks, and crystal rivers — Yakushima is a UNESCO World Heritage wilderness unlike anywhere else. Here's how to plan your visit.",
     image:
-      "https://images.unsplash.com/photo-1607619662634-3ac55ec0e216?w=800&q=80",
+      "https://images.unsplash.com/photo-1704686508379-8ee92cad45f6?w=800&q=80",
     author: "James Okafor",
     date: "2025-10-18",
     readTime: "14 min read",

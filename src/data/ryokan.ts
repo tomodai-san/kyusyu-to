@@ -1,4 +1,4 @@
-export interface Ryokan {
+﻿export interface Ryokan {
   slug: string;
   name: string;
   location: string;
@@ -28,7 +28,7 @@ export const ryokans: Ryokan[] = [
     description:
       "Set in a cedar forest with direct views of Mt. Yufu, this award-winning ryokan offers private rotenburo baths, multi-course kaiseki dinners, and impeccably attentive omotenashi hospitality.",
     image:
-      "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800&q=80",
+      "https://images.unsplash.com/photo-1759310708340-90eba93e94e4?w=800&q=80",
     amenities: [
       "Private rotenburo",
       "Kaiseki dinner",
@@ -52,7 +52,7 @@ export const ryokans: Ryokan[] = [
     description:
       "Located in Beppu's atmospheric Kannawa district, this century-old inn uses natural steam vents to heat its rooms and cook its seasonal meals — an experience you can't get anywhere else.",
     image:
-      "https://images.unsplash.com/photo-1601823984263-b87b59798b70?w=800&q=80",
+      "https://images.unsplash.com/photo-1738831202493-f49b0cdc7648?w=800&q=80",
     amenities: [
       "Steam cooking",
       "Communal onsen",
@@ -76,7 +76,7 @@ export const ryokans: Ryokan[] = [
     description:
       "Perched on Nagasaki's famous Glover Hill, this boutique ryokan marries traditional tatami rooms with Franco-Japanese cuisine reflecting the city's unique history of European influence.",
     image:
-      "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80",
+      "https://images.unsplash.com/photo-1610333684078-c89bd57f2e46?w=800&q=80",
     amenities: [
       "Harbour views",
       "Rooftop onsen",
@@ -100,7 +100,7 @@ export const ryokans: Ryokan[] = [
     description:
       "Kurokawa Onsen is regularly voted Japan's best hot spring town, and this intimate riverside ryokan sits at its heart — complete with outdoor baths beneath Japanese maples and a celebrated 12-dish kaiseki menu.",
     image:
-      "https://images.unsplash.com/photo-1614016957547-ceba73462f37?w=800&q=80",
+      "https://images.unsplash.com/photo-1771030667899-e7a6938b2e81?w=800&q=80",
     amenities: [
       "Riverside rotenburo",
       "12-dish kaiseki",
@@ -124,7 +124,7 @@ export const ryokans: Ryokan[] = [
     description:
       "Ibusuki's legendary ryokan where guests are buried up to their necks in naturally heated volcanic sand. With Sakurajima perfectly framed from the garden, this is Kagoshima's most iconic stay.",
     image:
-      "https://images.unsplash.com/photo-1607619662634-3ac55ec0e216?w=800&q=80",
+      "https://images.unsplash.com/photo-1759310707181-55b460b706f1?w=800&q=80",
     amenities: [
       "Sunamushi sand bath",
       "Sakurajima views",
@@ -148,7 +148,7 @@ export const ryokans: Ryokan[] = [
     description:
       "Stay in a beautifully restored Meiji-era machiya (townhouse) just steps from Kushida Shrine. Communal baths and a shared kitchen make this ideal for solo travellers and couples on a budget.",
     image:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+      "https://images.unsplash.com/photo-1771030669954-a02e803c68a7?w=800&q=80",
     amenities: [
       "Restored machiya",
       "Shared Japanese bath",

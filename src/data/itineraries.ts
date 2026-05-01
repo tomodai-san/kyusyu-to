@@ -1,4 +1,4 @@
-export interface Itinerary {
+﻿export interface Itinerary {
   slug: string;
   title: string;
   duration: string;
@@ -27,7 +27,7 @@ export const itineraries: Itinerary[] = [
     description:
       "Cover Kyushu's greatest hits in a week: Fukuoka's street food, Nagasaki's history, Kumamoto's castle, and the steaming onsen of Beppu and Yufuin. Travels entirely by Shinkansen and limited express — no car required.",
     image:
-      "https://images.unsplash.com/photo-1614016957547-ceba73462f37?w=1200&q=80",
+      "https://images.unsplash.com/photo-1698879434759-0a54b36a3233?w=1200&q=80",
     route: ["Fukuoka", "Nagasaki", "Kumamoto", "Aso", "Beppu", "Yufuin", "Fukuoka"],
     highlights: [
       "Hakata street food yatai",
@@ -52,7 +52,7 @@ export const itineraries: Itinerary[] = [
     description:
       "The ultimate spa itinerary: soak in Yufuin's forested baths, explore Beppu's volcanic 'hells', and end in the sublime village of Kurokawa Onsen with a multi-ryokan onsen pass.",
     image:
-      "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1200&q=80",
+      "https://images.unsplash.com/photo-1759310708340-90eba93e94e4?w=1200&q=80",
     route: ["Fukuoka", "Yufuin", "Beppu", "Kurokawa Onsen", "Fukuoka"],
     highlights: [
       "Yufuin boutique ryokan",
@@ -76,7 +76,7 @@ export const itineraries: Itinerary[] = [
     description:
       "Hike the rim of the world's largest caldera, explore ancient cedar forests in Yakushima (UNESCO), and watch Sakurajima belch ash over Kagoshima Bay. Kyushu's geological drama at its finest.",
     image:
-      "https://images.unsplash.com/photo-1607619662634-3ac55ec0e216?w=1200&q=80",
+      "https://images.unsplash.com/photo-1704686508379-8ee92cad45f6?w=1200&q=80",
     route: ["Kumamoto", "Mt. Aso", "Kagoshima", "Sakurajima", "Yakushima Island"],
     highlights: [
       "Mt. Aso crater rim hike",
@@ -100,7 +100,7 @@ export const itineraries: Itinerary[] = [
     description:
       "Kyushu was Japan's window to the world for centuries. Walk Nagasaki's Dutch and Chinese quarters, explore Kumamoto's legendary samurai castle, and trace the Satsuma clan's legacy in Kagoshima.",
     image:
-      "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=1200&q=80",
+      "https://images.unsplash.com/photo-1624517608488-05c8419ec931?w=1200&q=80",
     route: ["Fukuoka", "Nagasaki", "Kumamoto", "Kagoshima"],
     highlights: [
       "Nagasaki Atomic Bomb Museum",
@@ -124,7 +124,7 @@ export const itineraries: Itinerary[] = [
     description:
       "Three days dedicated entirely to Kyushu's legendary food scene: the birthplace of tonkotsu ramen, home of Hakata mentaiko (spicy fish roe), aged Satsuma shochu, and the freshest seafood in Japan.",
     image:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80",
+      "https://images.unsplash.com/photo-1605088298038-2876387a80c1?w=1200&q=80",
     route: ["Fukuoka", "Yanagawa", "Kagoshima"],
     highlights: [
       "Hakata yatai food stalls",

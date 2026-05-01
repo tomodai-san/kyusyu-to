@@ -1,4 +1,4 @@
-export interface Destination {
+﻿export interface Destination {
   slug: string;
   name: string;
   prefecture: string;
@@ -20,7 +20,7 @@ export const destinations: Destination[] = [
     description:
       "Fukuoka is Kyushu's largest city, blending ultramodern architecture with ancient shrines. Famous for its ramen, fresh seafood, and the UNESCO-listed Hakata culture, it's the perfect entry point to explore the island.",
     image:
-      "https://images.unsplash.com/photo-1614016957547-ceba73462f37?w=1200&q=80",
+      "https://images.unsplash.com/photo-1605088298038-2876387a80c1?w=1200&q=80",
     highlights: [
       "Hakata Ramen",
       "Canal City Hakata",
@@ -40,7 +40,7 @@ export const destinations: Destination[] = [
     description:
       "A city shaped by centuries of foreign trade, Nagasaki's charming hillside streets, historic churches, and emotional peace memorials create an experience unlike anywhere else in Japan.",
     image:
-      "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=1200&q=80",
+      "https://images.unsplash.com/photo-1624517608488-05c8419ec931?w=1200&q=80",
     highlights: [
       "Peace Memorial Park",
       "Glover Garden",
@@ -60,7 +60,7 @@ export const destinations: Destination[] = [
     description:
       "Beppu is famous for its otherworldly 'hells' — boiling, colourful hot spring pools — and an almost limitless variety of onsen experiences, from sand baths to steam baths to mud pools.",
     image:
-      "https://images.unsplash.com/photo-1601823984263-b87b59798b70?w=1200&q=80",
+      "https://images.unsplash.com/photo-1752917870379-ed88be3c2050?w=1200&q=80",
     highlights: [
       "Beppu Hells (Jigoku Meguri)",
       "Sand bath onsen",
@@ -80,7 +80,7 @@ export const destinations: Destination[] = [
     description:
       "Home to one of Japan's finest castle keeps and the gateway to the massive Aso caldera, Kumamoto blends samurai history with jaw-dropping natural landscapes.",
     image:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80",
+      "https://images.unsplash.com/photo-1705695464723-56195396666b?w=1200&q=80",
     highlights: [
       "Kumamoto Castle",
       "Mt. Aso caldera",
@@ -100,7 +100,7 @@ export const destinations: Destination[] = [
     description:
       "Overlooked by the perpetually smoking Sakurajima volcano, Kagoshima is a spirited city with excellent black pork cuisine, the gateway to subtropical Yakushima Island, and the proud Satsuma samurai legacy.",
     image:
-      "https://images.unsplash.com/photo-1607619662634-3ac55ec0e216?w=1200&q=80",
+      "https://images.unsplash.com/photo-1704686508379-8ee92cad45f6?w=1200&q=80",
     highlights: [
       "Sakurajima volcano",
       "Sengan-en garden",
@@ -120,7 +120,7 @@ export const destinations: Destination[] = [
     description:
       "Nestled in a misty highland basin beneath twin peaks, Yufuin is Japan's most beloved onsen resort village — think boutique ryokan, morning lake mist, artisan galleries, and unparalleled tranquillity.",
     image:
-      "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1200&q=80",
+      "https://images.unsplash.com/photo-1624517608599-7ee67458a3da?w=1200&q=80",
     highlights: [
       "Kinrinko Lake morning mist",
       "Yufuin Floral Village",
