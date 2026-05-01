@@ -23,6 +23,20 @@ const shrines = [
     imageAlt: "Red and gold staircase climbing the hillside at Yutoku Inari Shrine, Saga",
     tag: "Must Visit",
     tagColor: "bg-[#bc002d]",
+    gallery: [
+      {
+        src: "https://images.unsplash.com/photo-1688717320807-f9385e5c299e",
+        alt: "Red and gold staircase climbing the hillside at Yutoku Inari Shrine",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1688717306718-13b7717d913d",
+        alt: "Main hall of Yutoku Inari Shrine framed by trees, Saga",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1688717320742-1bb85dd0a391",
+        alt: "Red torii gate and stone steps at Yutoku Inari Shrine",
+      },
+    ],
   },
   {
     name: "Takeo Shrine",
@@ -190,7 +204,42 @@ const schema = {
                 <span class={`absolute top-4 left-4 ${shrine.tagColor} text-white text-xs font-semibold px-3 py-1 rounded-full`}>
                   {shrine.tag}
                 </span>
+                {'gallery' in shrine && (
+                  <button
+                    class="gallery-open absolute bottom-4 right-4 flex items-center gap-1.5 bg-black/50 hover:bg-black/70 text-white text-xs font-medium px-3 py-1.5 rounded-full backdrop-blur-sm transition-colors"
+                    data-gallery={JSON.stringify((shrine as any).gallery)}
+                    data-index="0"
+                    aria-label="View all photos"
+                  >
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5" />
+                    </svg>
+                    <span>1 / {(shrine as any).gallery.length} photos</span>
+                  </button>
+                )}
               </div>
+
+              {'gallery' in shrine && (
+                <div class="mt-3 grid grid-cols-3 gap-2">
+                  {(shrine as any).gallery.map((photo: {src: string; alt: string}, idx: number) => (
+                    <button
+                      class="gallery-open overflow-hidden rounded-lg aspect-[4/3] cursor-zoom-in group"
+                      data-gallery={JSON.stringify((shrine as any).gallery)}
+                      data-index={idx}
+                      aria-label={`View photo ${idx + 1}`}
+                    >
+                      <img
+                        src={`${photo.src}?w=300&q=70`}
+                        alt={photo.alt}
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        width="300"
+                        height="225"
+                        loading="lazy"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             <!-- Content -->
@@ -339,4 +388,123 @@ const schema = {
     </div>
   </section>
 
+
+  <!-- Lightbox -->
+  <dialog
+    id="gallery-lightbox"
+    class="fixed inset-0 z-50 w-full h-full max-w-none max-h-none m-0 p-0 bg-transparent backdrop:bg-black/80"
+  >
+    <div class="flex items-center justify-center w-full h-full p-4 md:p-10">
+      <div class="relative max-w-4xl w-full">
+        <!-- Close -->
+        <button
+          id="lb-close"
+          class="absolute -top-10 right-0 text-white/80 hover:text-white text-sm flex items-center gap-1"
+          aria-label="Close"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+          Close
+        </button>
+
+        <!-- Main image -->
+        <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-black">
+          <img
+            id="lb-img"
+            src=""
+            alt=""
+            class="w-full max-h-[70vh] object-contain"
+            width="1200"
+            height="900"
+          />
+          <!-- Counter -->
+          <div id="lb-counter" class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white text-xs px-3 py-1 rounded-full"></div>
+        </div>
+
+        <!-- Nav arrows -->
+        <button
+          id="lb-prev"
+          class="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors"
+          aria-label="Previous photo"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+          </svg>
+        </button>
+        <button
+          id="lb-next"
+          class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors"
+          aria-label="Next photo"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </button>
+
+        <!-- Thumbnail strip -->
+        <div id="lb-thumbs" class="flex gap-2 mt-3 justify-center"></div>
+      </div>
+    </div>
+  </dialog>
+
 </BaseLayout>
+
+<script is:inline>
+  (function () {
+    const dialog = document.getElementById('gallery-lightbox');
+    const lbImg  = document.getElementById('lb-img');
+    const lbCounter = document.getElementById('lb-counter');
+    const lbThumbs  = document.getElementById('lb-thumbs');
+    const btnClose  = document.getElementById('lb-close');
+    const btnPrev   = document.getElementById('lb-prev');
+    const btnNext   = document.getElementById('lb-next');
+
+    let gallery = [];
+    let current = 0;
+
+    function show(idx) {
+      current = (idx + gallery.length) % gallery.length;
+      lbImg.src = gallery[current].src + '?w=1200&q=90';
+      lbImg.alt = gallery[current].alt;
+      lbCounter.textContent = (current + 1) + ' / ' + gallery.length;
+      lbThumbs.querySelectorAll('button').forEach((b, i) => {
+        b.classList.toggle('ring-2', i === current);
+        b.classList.toggle('ring-[#c9a84c]', i === current);
+      });
+    }
+
+    function open(g, idx) {
+      gallery = g;
+      lbThumbs.innerHTML = gallery.map((p, i) =>
+        '<button class="overflow-hidden rounded-lg w-16 h-12 flex-shrink-0 transition-all" data-i="' + i + '">' +
+        '<img src="' + p.src + '?w=160&q=70" alt="' + p.alt + '" class="w-full h-full object-cover" loading="lazy" />' +
+        '</button>'
+      ).join('');
+      lbThumbs.querySelectorAll('button').forEach(b => {
+        b.addEventListener('click', () => show(Number(b.dataset.i)));
+      });
+      show(idx);
+      dialog.showModal();
+    }
+
+    document.querySelectorAll('.gallery-open').forEach(btn => {
+      btn.addEventListener('click', () => {
+        open(JSON.parse(btn.dataset.gallery), Number(btn.dataset.index));
+      });
+    });
+
+    btnClose.addEventListener('click', () => dialog.close());
+    btnPrev.addEventListener('click',  () => show(current - 1));
+    btnNext.addEventListener('click',  () => show(current + 1));
+
+    dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
+
+    document.addEventListener('keydown', e => {
+      if (!dialog.open) return;
+      if (e.key === 'Escape')     dialog.close();
+      if (e.key === 'ArrowLeft')  show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+    });
+  })();
+</script>
