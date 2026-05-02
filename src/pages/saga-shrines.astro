@@ -96,12 +96,12 @@ const shrines = [
     gallery: [
       {
         src: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Torii_of_Karatsu_Shrine_-_Nov_3%2C_2010.jpg/1280px-Torii_of_Karatsu_Shrine_-_Nov_3%2C_2010.jpg",
-        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Torii_of_Karatsu_Shrine_-_Nov_3%2C_2010.jpg/300px-Torii_of_Karatsu_Shrine_-_Nov_3%2C_2010.jpg",
+        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Torii_of_Karatsu_Shrine_-_Nov_3%2C_2010.jpg/500px-Torii_of_Karatsu_Shrine_-_Nov_3%2C_2010.jpg",
         alt: "Torii gate of Karatsu Shrine on Karatsu Kunchi festival day (Nov 3), Saga",
       },
       {
         src: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Torii_and_Honden_of_Karatsu_Shrine.JPG/1280px-Torii_and_Honden_of_Karatsu_Shrine.JPG",
-        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Torii_and_Honden_of_Karatsu_Shrine.JPG/300px-Torii_and_Honden_of_Karatsu_Shrine.JPG",
+        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Torii_and_Honden_of_Karatsu_Shrine.JPG/500px-Torii_and_Honden_of_Karatsu_Shrine.JPG",
         alt: "Torii and main hall (honden) of Karatsu Shrine, Karatsu City, Saga Prefecture",
       },
     ],
@@ -131,17 +131,17 @@ const shrines = [
     gallery: [
       {
         src: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Yoka-jinja_Shrine_camphor_tree.JPG/1280px-Yoka-jinja_Shrine_camphor_tree.JPG",
-        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Yoka-jinja_Shrine_camphor_tree.JPG/300px-Yoka-jinja_Shrine_camphor_tree.JPG",
+        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Yoka-jinja_Shrine_camphor_tree.JPG/500px-Yoka-jinja_Shrine_camphor_tree.JPG",
         alt: "Ancient 1,200-year-old camphor tree at Yoka Shrine, Saga City",
       },
       {
         src: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Yoka-jinja_Shrine_Front.JPG/1280px-Yoka-jinja_Shrine_Front.JPG",
-        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Yoka-jinja_Shrine_Front.JPG/300px-Yoka-jinja_Shrine_Front.JPG",
+        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Yoka-jinja_Shrine_Front.JPG/500px-Yoka-jinja_Shrine_Front.JPG",
         alt: "Main gate (romon) and approach of Yoka Shrine, Saga City",
       },
       {
         src: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Yoka-jinja_Shrine_romon_2023.jpg/1280px-Yoka-jinja_Shrine_romon_2023.jpg",
-        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Yoka-jinja_Shrine_romon_2023.jpg/300px-Yoka-jinja_Shrine_romon_2023.jpg",
+        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Yoka-jinja_Shrine_romon_2023.jpg/500px-Yoka-jinja_Shrine_romon_2023.jpg",
         alt: "Romon gate of Yoka Shrine illuminated, Saga City, 2023",
       },
     ],
@@ -519,7 +519,7 @@ const schema = {
     function show(idx) {
       current = (idx + gallery.length) % gallery.length;
       var s = gallery[current].src;
-      lbImg.src = s.includes('?') ? s : s + '?w=1200&q=90';
+      lbImg.src = s.includes('wikimedia') ? s : (s.includes('?') ? s : s + '?w=1200&q=90');
       lbImg.alt = gallery[current].alt;
       lbCounter.textContent = (current + 1) + ' / ' + gallery.length;
       lbThumbs.querySelectorAll('button').forEach((b, i) => {
@@ -530,11 +530,12 @@ const schema = {
 
     function open(g, idx) {
       gallery = g;
-      lbThumbs.innerHTML = gallery.map((p, i) =>
-        '<button class="overflow-hidden rounded-lg w-16 h-12 flex-shrink-0 transition-all" data-i="' + i + '">' +
-        '<img src="' + p.src + '?w=160&q=70" alt="' + p.alt + '" class="w-full h-full object-cover" loading="lazy" />' +
-        '</button>'
-      ).join('');
+      lbThumbs.innerHTML = gallery.map((p, i) => {
+        var ts = p.thumb ? p.thumb : (p.src.includes('?') ? p.src : p.src + '?w=160&q=70');
+        return '<button class="overflow-hidden rounded-lg w-16 h-12 flex-shrink-0 transition-all" data-i="' + i + '">' +
+        '<img src="' + ts + '" alt="' + p.alt + '" class="w-full h-full object-cover" loading="lazy" />' +
+        '</button>';
+      }).join('');
       lbThumbs.querySelectorAll('button').forEach(b => {
         b.addEventListener('click', () => show(Number(b.dataset.i)));
       });
