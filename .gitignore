@@ -27,3 +27,9 @@ Thumbs.db
 # generated script output and input drafts
 scripts/output/
 scripts/input/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
