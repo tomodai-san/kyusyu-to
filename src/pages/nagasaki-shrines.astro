@@ -1,0 +1,510 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AffiliateBox from '../components/AffiliateBox.astro';
+
+const shrines = [
+  {
+    name: "Suwa Shrine",
+    nameJp: "諏訪神社",
+    location: "Nagasaki City",
+    rank: "Nagasaki's Most Important Shrine",
+    description:
+      "Nagasaki's most important Shinto shrine sits atop a forested hill above the city, reached by 173 dramatic stone steps. Since 1625 it has served as the city's guardian deity, and every October it hosts Nagasaki Kunchi — one of Japan's three great festivals — where Chinese-influenced dragon dances and elaborately decorated floats fill the streets. The festival's unique blend of Shinto ritual and Chinese performance tradition reflects Nagasaki's centuries as Japan's sole window to the outside world.",
+    highlights: [
+      "Home of Nagasaki Kunchi (Oct 7–9) — one of Japan's three great festivals with Chinese dragon dances",
+      "173 stone steps lead to the hilltop precincts with panoramic harbour views",
+      "Founded in 1625 as Nagasaki's guardian shrine — the oldest in the city",
+      "Festival floats (dashibono) from city districts rotate on a 7-year performance cycle",
+    ],
+    access: "10-min walk from Nagasaki Station; 2h from Fukuoka (Hakata) by Kamome Shinkansen",
+    hours: "Open daily, dawn to dusk; shrine offices 9:00–17:00",
+    admission: "Free",
+    officialUrl: "https://www.osuwasan.jp/",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Nagasaki-Suwa-Shrine-1558.jpg/1280px-Nagasaki-Suwa-Shrine-1558.jpg",
+    imageAlt: "Suwa Shrine Nagasaki — shrine gate and precincts",
+    // Wikimedia Commons (CC BY-SA)
+    gallery: [
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Nagasaki-Suwa-Shrine-1546.jpg/1280px-Nagasaki-Suwa-Shrine-1546.jpg",
+        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Nagasaki-Suwa-Shrine-1546.jpg/300px-Nagasaki-Suwa-Shrine-1546.jpg",
+        alt: "Suwa Shrine Nagasaki — stone approach and shrine buildings",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Nagasaki-Suwa-Shrine-1558.jpg/1280px-Nagasaki-Suwa-Shrine-1558.jpg",
+        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Nagasaki-Suwa-Shrine-1558.jpg/300px-Nagasaki-Suwa-Shrine-1558.jpg",
+        alt: "Suwa Shrine Nagasaki — shrine gate and precincts",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Suwa_Shrine%2C_Nagasaki%2C_20240815_1356_3666.jpg/1280px-Suwa_Shrine%2C_Nagasaki%2C_20240815_1356_3666.jpg",
+        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Suwa_Shrine%2C_Nagasaki%2C_20240815_1356_3666.jpg/300px-Suwa_Shrine%2C_Nagasaki%2C_20240815_1356_3666.jpg",
+        alt: "Main hall of Suwa Shrine, Nagasaki City",
+      },
+    ],
+    tag: "Must Visit",
+    tagColor: "bg-[#bc002d]",
+  },
+  {
+    name: "Sanno Shrine",
+    nameJp: "山王神社",
+    location: "Nagasaki City",
+    rank: "The One-Pillar Torii That Survived the Bomb",
+    description:
+      "Just 800 metres from the atomic bomb hypocenter, Sanno Shrine's most powerful feature is a torii gate with only one pillar remaining — the other half was obliterated by the blast on August 9, 1945. The gate still stands today, exactly as the explosion left it, as one of Nagasaki's most poignant symbols of survival and resilience. Two enormous camphor trees in the precincts also survived and are now designated natural monuments. The contrast between the quiet residential neighbourhood and this profound historical weight is unforgettable.",
+    highlights: [
+      "The one-pillar torii (一本柱鳥居) — half-destroyed by the 1945 atomic bomb, still standing as found",
+      "Two survivor camphor trees, designated Nagasaki natural monuments",
+      "Located 800m from the atomic bomb hypocenter — walkable from Peace Park",
+      "Rarely crowded — a contemplative and deeply moving experience",
+    ],
+    access: "15-min walk from Nagasaki Atomic Bomb Museum; 20-min tram from Nagasaki Station (Line 1 to Matsuyamamachi)",
+    hours: "Open daily, 24 hours (grounds)",
+    admission: "Free",
+    officialUrl: "https://sannou-jinjya.jp/",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/20190202_Sann%C5%8D_Shrine-6.jpg/1280px-20190202_Sann%C5%8D_Shrine-6.jpg",
+    imageAlt: "Close-up of the broken pillar base at Sanno Shrine, Nagasaki",
+    // Balon Greyjoy / Wikimedia Commons (CC0)
+    gallery: [
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/20190202_Sann%C5%8D_Shrine-1.jpg/1280px-20190202_Sann%C5%8D_Shrine-1.jpg",
+        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/20190202_Sann%C5%8D_Shrine-1.jpg/300px-20190202_Sann%C5%8D_Shrine-1.jpg",
+        alt: "The one-pillar torii of Sanno Shrine, Nagasaki — atomic bomb survivor",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/20190202_Sann%C5%8D_Shrine-6.jpg/1280px-20190202_Sann%C5%8D_Shrine-6.jpg",
+        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/20190202_Sann%C5%8D_Shrine-6.jpg/300px-20190202_Sann%C5%8D_Shrine-6.jpg",
+        alt: "Close-up of the broken pillar base at Sanno Shrine, Nagasaki",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/20190202_Sann%C5%8D_Shrine-2.jpg/1280px-20190202_Sann%C5%8D_Shrine-2.jpg",
+        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/20190202_Sann%C5%8D_Shrine-2.jpg/300px-20190202_Sann%C5%8D_Shrine-2.jpg",
+        alt: "Sanno Shrine grounds with survivor camphor trees, Nagasaki",
+      },
+    ],
+    tag: "Historical",
+    tagColor: "bg-[#1a2744]",
+  },
+  {
+    name: "Wakamiya Inari Shrine",
+    nameJp: "若宮稲荷神社",
+    location: "Nagasaki City",
+    rank: "Nagasaki's Hidden Torii Tunnel",
+    description:
+      "Tucked into the forested hillside above Nagasaki's historic Teramachi temple district, Wakamiya Inari Shrine is the city's best-kept secret. A tunnel of red and white torii gates climbs steeply through the trees, flanked by hundreds of stone lanterns — an atmosphere as magical as Kyoto's Fushimi Inari, but without the crowds. From the upper precincts, the view sweeps over Nagasaki's harbour and hillside houses. Almost no foreign tourists find their way here, making it one of the most authentic shrine experiences in Nagasaki.",
+    highlights: [
+      "Photogenic tunnel of successive red and white torii gates climbing the forested hillside",
+      "Hundreds of stone lanterns lining the steep approach staircase",
+      "Panoramic views over Nagasaki harbour from the upper precincts",
+      "Guardian shrine of the Teramachi district — founded in the Edo period",
+    ],
+    access: "15-min walk from Nagasaki Station; adjacent to Teramachi shopping street",
+    hours: "Open daily, dawn to dusk",
+    admission: "Free",
+    officialUrl: "https://www.at-nagasaki.jp/spot/61013",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Wakamiya-Inari-jinja%2C_Torii_gate_001.jpg/1280px-Wakamiya-Inari-jinja%2C_Torii_gate_001.jpg",
+    imageAlt: "Red torii gates climbing the forested hillside at Wakamiya Inari Shrine, Nagasaki",
+    // Naokijp / Wikimedia Commons (CC BY-SA 4.0)
+    gallery: [
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Wakamiya-Inari-jinja%2C_Torii_gate_001.jpg/1280px-Wakamiya-Inari-jinja%2C_Torii_gate_001.jpg",
+        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Wakamiya-Inari-jinja%2C_Torii_gate_001.jpg/300px-Wakamiya-Inari-jinja%2C_Torii_gate_001.jpg",
+        alt: "Torii gate tunnel at Wakamiya Inari Shrine, Nagasaki",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Wakamiya-Inari-jinja_001.jpg/1280px-Wakamiya-Inari-jinja_001.jpg",
+        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Wakamiya-Inari-jinja_001.jpg/300px-Wakamiya-Inari-jinja_001.jpg",
+        alt: "Wakamiya Inari Shrine grounds and stone lanterns, Nagasaki City",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Wakamiya-Inari-jinja_front_shrine.jpg/1280px-Wakamiya-Inari-jinja_front_shrine.jpg",
+        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Wakamiya-Inari-jinja_front_shrine.jpg/300px-Wakamiya-Inari-jinja_front_shrine.jpg",
+        alt: "Main hall of Wakamiya Inari Shrine, Nagasaki City",
+      },
+    ],
+    tag: "Hidden Gem",
+    tagColor: "bg-[#c9a84c] text-[#1a2744]",
+  },
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Sacred Nagasaki: A Guide to the City's Most Revered Shrines",
+  "description": "Discover Nagasaki's finest shrines — from the grand Suwa Shrine home of Nagasaki Kunchi to the haunting one-pillar torii of Sanno Shrine and the hidden torii tunnel of Wakamiya Inari.",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Suwa_Shrine%2C_Nagasaki%2C_20240815_1356_3666.jpg/1280px-Suwa_Shrine%2C_Nagasaki%2C_20240815_1356_3666.jpg",
+  "author": { "@type": "Organization", "name": "Kyushu Explorer" },
+  "publisher": { "@type": "Organization", "name": "Kyushu Explorer", "url": "https://realkyushu.com" },
+  "url": "https://realkyushu.com/nagasaki-shrines",
+  "about": {
+    "@type": "TouristDestination",
+    "name": "Nagasaki City",
+    "description": "Nagasaki City, Nagasaki Prefecture, Kyushu, Japan — shrine and cultural tourism guide",
+  },
+};
+---
+
+<BaseLayout
+  title="Sacred Nagasaki: A Guide to the City's Finest Shrines"
+  description="Discover Nagasaki's most revered shrines — from the grand Suwa Shrine (home of Nagasaki Kunchi) to the haunting atomic-bomb-survivor torii of Sanno Shrine and the hidden torii tunnel of Wakamiya Inari."
+  image="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Suwa_Shrine%2C_Nagasaki%2C_20240815_1356_3666.jpg/1280px-Suwa_Shrine%2C_Nagasaki%2C_20240815_1356_3666.jpg"
+  type="article"
+  schema={schema}
+>
+
+  <!-- Hero -->
+  <section class="relative h-[70vh] min-h-[480px] flex items-end" data-hero-page>
+    <div class="absolute inset-0 z-0">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Suwa_Shrine%2C_Nagasaki%2C_20240815_1356_3666.jpg/1280px-Suwa_Shrine%2C_Nagasaki%2C_20240815_1356_3666.jpg"
+        alt="Main hall of Suwa Shrine on a forested hillside above Nagasaki City"
+        class="w-full h-full object-cover"
+        width="1280"
+        height="853"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#1a2744] via-[#1a2744]/40 to-transparent"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 w-full">
+      <nav class="flex items-center gap-2 text-white/60 text-sm mb-6">
+        <a href="/" class="hover:text-white transition-colors">Home</a>
+        <span>/</span>
+        <a href="/destinations/nagasaki" class="hover:text-white transition-colors">Nagasaki</a>
+        <span>/</span>
+        <span class="text-white">Shrine Guide</span>
+      </nav>
+      <div class="tag mb-3 bg-white/20 text-white border border-white/30">Sacred Nagasaki</div>
+      <h1 class="font-serif font-bold text-5xl md:text-6xl text-white mb-4 max-w-3xl leading-tight">
+        The Shrines of Nagasaki
+      </h1>
+      <p class="text-[#c9a84c] text-xl font-medium max-w-2xl">
+        Festival grandeur, atomic bomb survival, and hidden torii tunnels — Nagasaki's shrines carry stories that go far beyond religion.
+      </p>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose-japan">
+        <p class="lead text-xl text-stone-600 leading-relaxed">
+          Nagasaki is most associated with its role as Japan's gateway to the world and with the tragedy of August 1945. Yet its Shinto shrines tell a parallel story — of a city that has always absorbed outside influences while maintaining its spiritual roots, and of faith that endures even the unimaginable.
+        </p>
+        <p>
+          The city's three most significant shrines are each extraordinary in their own way: one hosts a 400-year-old festival shaped by Chinese merchants; one carries the permanent scars of nuclear war; and one hides a torii tunnel on a forested hillside that almost no foreign visitors ever find. All three are within easy walking distance of central Nagasaki.
+        </p>
+      </div>
+
+      <!-- Quick nav chips -->
+      <div class="flex flex-wrap gap-3 mt-8">
+        {shrines.map(s => (
+          <a
+            href={`#${s.nameJp}`}
+            class="px-4 py-2 rounded-full bg-[#faf8f3] border border-stone-200 text-sm font-medium text-[#1a2744] hover:bg-[#1a2744] hover:text-white transition-colors"
+          >
+            {s.name}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Shrines -->
+  <section class="py-4 bg-[#faf8f3]">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20 py-16">
+      {shrines.map((shrine, i) => (
+        <article id={shrine.nameJp} class="scroll-mt-8">
+          <div class={`grid md:grid-cols-2 gap-10 items-start ${i % 2 === 1 ? 'md:grid-flow-dense' : ''}`}>
+            <!-- Image -->
+            <div class={`relative ${i % 2 === 1 ? 'md:col-start-2' : ''}`}>
+              <div class="relative overflow-hidden rounded-2xl aspect-[4/3] shadow-xl">
+                <img
+                  src={shrine.image}
+                  alt={shrine.imageAlt}
+                  class="w-full h-full object-cover"
+                  width="900"
+                  height="675"
+                  loading="lazy"
+                />
+                <span class={`absolute top-4 left-4 ${shrine.tagColor} text-white text-xs font-semibold px-3 py-1 rounded-full`}>
+                  {shrine.tag}
+                </span>
+                {'gallery' in shrine && (
+                  <button
+                    class="gallery-open absolute bottom-4 right-4 flex items-center gap-1.5 bg-black/50 hover:bg-black/70 text-white text-xs font-medium px-3 py-1.5 rounded-full backdrop-blur-sm transition-colors"
+                    data-gallery={JSON.stringify((shrine as any).gallery)}
+                    data-index="0"
+                    aria-label="View all photos"
+                  >
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5" />
+                    </svg>
+                    <span>1 / {(shrine as any).gallery.length} photos</span>
+                  </button>
+                )}
+              </div>
+
+              {'gallery' in shrine && (
+                <div class={`mt-3 grid gap-2 ${(shrine as any).gallery.length >= 3 ? 'grid-cols-3' : 'grid-cols-2'}`}>
+                  {(shrine as any).gallery.map((photo: {src: string; thumb?: string; alt: string}, idx: number) => (
+                    <button
+                      class="gallery-open overflow-hidden rounded-lg aspect-[4/3] cursor-zoom-in group"
+                      data-gallery={JSON.stringify((shrine as any).gallery)}
+                      data-index={idx}
+                      aria-label={`View photo ${idx + 1}`}
+                    >
+                      <img
+                        src={photo.thumb ?? `${photo.src}?w=300&q=70`}
+                        alt={photo.alt}
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        width="300"
+                        height="225"
+                        loading="lazy"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <!-- Content -->
+            <div class={`space-y-5 ${i % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}`}>
+              <div>
+                <p class="text-[#bc002d] text-sm font-semibold uppercase tracking-wider mb-1">{shrine.rank}</p>
+                <h2 class="font-serif font-bold text-3xl text-[#1a2744] leading-tight">
+                  {shrine.name}
+                  <span class="block text-lg font-normal text-stone-500 mt-1">{shrine.nameJp} — {shrine.location}</span>
+                </h2>
+              </div>
+
+              <p class="text-stone-600 leading-relaxed">{shrine.description}</p>
+
+              <ul class="space-y-2">
+                {shrine.highlights.map(h => (
+                  <li class="flex items-start gap-2 text-sm text-stone-600">
+                    <span class="text-[#c9a84c] font-bold mt-0.5 flex-shrink-0">→</span>
+                    {h}
+                  </li>
+                ))}
+              </ul>
+
+              <!-- Practical info -->
+              <div class="bg-white rounded-xl p-4 border border-stone-200 space-y-2 text-sm">
+                <div class="flex gap-2">
+                  <span class="text-stone-400 w-20 flex-shrink-0">Access</span>
+                  <span class="text-stone-700">{shrine.access}</span>
+                </div>
+                <div class="flex gap-2">
+                  <span class="text-stone-400 w-20 flex-shrink-0">Hours</span>
+                  <span class="text-stone-700">{shrine.hours}</span>
+                </div>
+                <div class="flex gap-2">
+                  <span class="text-stone-400 w-20 flex-shrink-0">Admission</span>
+                  <span class="text-stone-700">{shrine.admission}</span>
+                </div>
+                {'officialUrl' in shrine && (
+                  <div class="flex gap-2 pt-1 border-t border-stone-100">
+                    <span class="text-stone-400 w-20 flex-shrink-0">Website</span>
+                    <a href={(shrine as any).officialUrl} target="_blank" rel="noopener noreferrer" class="text-[#bc002d] hover:underline font-medium">Official site →</a>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Visitor Tips -->
+  <section class="py-16 bg-[#1a2744] text-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-12 items-start">
+        <div>
+          <div class="tag bg-white/10 text-[#c9a84c] mb-4 inline-block">Before You Go</div>
+          <h2 class="font-serif font-bold text-3xl mb-6">Shrine Etiquette & Tips</h2>
+          <ul class="space-y-4 text-white/80">
+            {[
+              { icon: "🚿", tip: "Purify your hands at the temizuya (water basin) before approaching the main hall — rinse left hand, then right, then mouth." },
+              { icon: "🎋", tip: "Bow twice, clap twice, make your silent wish, bow once more — the standard Shinto prayer sequence." },
+              { icon: "🕯️", tip: "At Sanno Shrine, approach quietly and respectfully — this is a place of deep historical weight, not just sightseeing." },
+              { icon: "📷", tip: "Photography is welcome in grounds and approaches. At Sanno Shrine, photograph the torii with thoughtfulness." },
+              { icon: "👟", tip: "Wakamiya Inari's staircase is steep — wear comfortable shoes and allow 20 minutes for the climb." },
+            ].map(item => (
+              <li class="flex gap-3">
+                <span class="text-xl flex-shrink-0">{item.icon}</span>
+                <span class="text-sm leading-relaxed">{item.tip}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="space-y-5">
+          <div class="tag bg-white/10 text-[#c9a84c] inline-block">Walking Route</div>
+          <h2 class="font-serif font-bold text-3xl mb-4">Suggested Half-Day Itinerary</h2>
+          <ol class="space-y-4">
+            {[
+              { time: "9:00",  desc: "Suwa Shrine — climb the 173 steps, explore the hilltop precincts and harbour views." },
+              { time: "10:30", desc: "Walk downhill through the Teramachi district. Detour into Wakamiya Inari's torii tunnel." },
+              { time: "11:30", desc: "Tram to Matsuyamamachi (Line 1). Walk 5 min to Sanno Shrine one-pillar torii." },
+              { time: "12:30", desc: "Continue on foot (10 min) to Nagasaki Atomic Bomb Museum and Peace Park." },
+              { time: "14:00", desc: "Lunch in Urakami district — try Nagasaki champon or sara udon noodles." },
+              { time: "15:00", desc: "Optional: Urakami Cathedral (rebuilt after the bomb), 5-min walk from Peace Park." },
+            ].map(step => (
+              <li class="flex gap-4 text-sm">
+                <span class="text-[#c9a84c] font-semibold w-12 flex-shrink-0 pt-0.5">{step.time}</span>
+                <span class="text-white/80 leading-relaxed">{step.desc}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Accent image -->
+  <section class="relative h-64 overflow-hidden">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/20190202_Sann%C5%8D_Shrine-1.jpg/1280px-20190202_Sann%C5%8D_Shrine-1.jpg"
+      alt="The one-pillar torii of Sanno Shrine, Nagasaki — survivor of the 1945 atomic bomb"
+      class="w-full h-full object-cover object-center"
+      width="1280"
+      height="853"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-[#1a2744]/55 flex items-center justify-center">
+      <div class="text-center text-white px-4">
+        <p class="font-serif text-3xl font-bold mb-2">Plan Your Nagasaki Shrine Journey</p>
+        <p class="text-white/70">Stay the night and experience the city's spiritual side after the day-trippers leave.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Affiliate -->
+  <section class="py-16 bg-[#faf8f3]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      <AffiliateBox
+        type="booking"
+        url="https://www.booking.com/affiliate/kyushu-explorer"
+        title="Where to Stay in Nagasaki"
+        description="Nagasaki's hillside hotels and harbour-view ryokan fill up fast in October (Kunchi festival). Book early — most properties include free cancellation."
+      />
+      <AffiliateBox
+        type="klook"
+        url="https://affiliate.klook.com/redirect?aid=119974&aff_adid=1266564&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2F"
+        title="Nagasaki Day Tours & Experiences"
+        description="Guided Nagasaki history walks, Gunkanjima (Battleship Island) boat tours, and Nagasaki Lantern Festival experiences."
+      />
+    </div>
+  </section>
+
+  <!-- Related links -->
+  <section class="py-12 bg-white border-t border-stone-100">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h3 class="font-serif font-bold text-xl text-[#1a2744] mb-6">Explore More of Nagasaki</h3>
+      <div class="flex flex-wrap gap-4">
+        <a href="/destinations/nagasaki" class="card-japan p-4 flex-1 min-w-[180px] hover:shadow-md transition-shadow">
+          <p class="text-xs text-[#bc002d] font-semibold uppercase tracking-wider mb-1">Destination Guide</p>
+          <p class="font-serif font-bold text-[#1a2744]">Nagasaki Overview →</p>
+        </a>
+        <a href="/destinations/fukuoka" class="card-japan p-4 flex-1 min-w-[180px] hover:shadow-md transition-shadow">
+          <p class="text-xs text-stone-500 uppercase tracking-wider mb-1">Nearby</p>
+          <p class="font-serif font-bold text-[#1a2744]">Fukuoka Guide →</p>
+        </a>
+        <a href="/itineraries" class="card-japan p-4 flex-1 min-w-[180px] hover:shadow-md transition-shadow">
+          <p class="text-xs text-stone-500 uppercase tracking-wider mb-1">Plan Your Trip</p>
+          <p class="font-serif font-bold text-[#1a2744]">Kyushu Itineraries →</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <dialog
+    id="gallery-lightbox"
+    class="fixed inset-0 z-50 w-full h-full max-w-none max-h-none m-0 p-0 bg-transparent backdrop:bg-black/80"
+  >
+    <div class="flex items-center justify-center w-full h-full p-4 md:p-10">
+      <div class="relative max-w-4xl w-full">
+        <button
+          id="lb-close"
+          class="absolute -top-10 right-0 text-white/80 hover:text-white text-sm flex items-center gap-1"
+          aria-label="Close"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+          Close
+        </button>
+        <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-black">
+          <img id="lb-img" src="" alt="" class="w-full max-h-[70vh] object-contain" width="1200" height="900" />
+          <div id="lb-counter" class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white text-xs px-3 py-1 rounded-full"></div>
+        </div>
+        <button id="lb-prev" class="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors" aria-label="Previous photo">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+        </button>
+        <button id="lb-next" class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors" aria-label="Next photo">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+        </button>
+        <div id="lb-thumbs" class="flex gap-2 mt-3 justify-center"></div>
+      </div>
+    </div>
+  </dialog>
+
+</BaseLayout>
+
+<script is:inline>
+  (function () {
+    const dialog = document.getElementById('gallery-lightbox');
+    const lbImg  = document.getElementById('lb-img');
+    const lbCounter = document.getElementById('lb-counter');
+    const lbThumbs  = document.getElementById('lb-thumbs');
+    const btnClose  = document.getElementById('lb-close');
+    const btnPrev   = document.getElementById('lb-prev');
+    const btnNext   = document.getElementById('lb-next');
+
+    let gallery = [];
+    let current = 0;
+
+    function show(idx) {
+      current = (idx + gallery.length) % gallery.length;
+      var s = gallery[current].src;
+      lbImg.src = s.includes('?') ? s : s + '?w=1200&q=90';
+      lbImg.alt = gallery[current].alt;
+      lbCounter.textContent = (current + 1) + ' / ' + gallery.length;
+      lbThumbs.querySelectorAll('button').forEach((b, i) => {
+        b.classList.toggle('ring-2', i === current);
+        b.classList.toggle('ring-[#c9a84c]', i === current);
+      });
+    }
+
+    function open(g, idx) {
+      gallery = g;
+      lbThumbs.innerHTML = gallery.map((p, i) =>
+        '<button class="overflow-hidden rounded-lg w-16 h-12 flex-shrink-0 transition-all" data-i="' + i + '">' +
+        '<img src="' + p.src + '?w=160&q=70" alt="' + p.alt + '" class="w-full h-full object-cover" loading="lazy" />' +
+        '</button>'
+      ).join('');
+      lbThumbs.querySelectorAll('button').forEach(b => {
+        b.addEventListener('click', () => show(Number(b.dataset.i)));
+      });
+      show(idx);
+      dialog.showModal();
+    }
+
+    document.querySelectorAll('.gallery-open').forEach(btn => {
+      btn.addEventListener('click', () => {
+        open(JSON.parse(btn.dataset.gallery), Number(btn.dataset.index));
+      });
+    });
+
+    btnClose.addEventListener('click', () => dialog.close());
+    btnPrev.addEventListener('click',  () => show(current - 1));
+    btnNext.addEventListener('click',  () => show(current + 1));
+
+    dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
+
+    document.addEventListener('keydown', e => {
+      if (!dialog.open) return;
+      if (e.key === 'Escape')     dialog.close();
+      if (e.key === 'ArrowLeft')  show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+    });
+  })();
+</script>

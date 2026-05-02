@@ -19,6 +19,7 @@ const shrines = [
     access: "20-min bus from Hizen-Kashima Station (JR Nagasaki Line); 1h from Fukuoka by train",
     hours: "Open daily, 24 hours (grounds); shrine offices 8:30–17:00",
     admission: "Free (inner precincts); ¥200 cable car optional",
+    officialUrl: "https://www.yutokusan.jp/",
     image: "https://images.unsplash.com/photo-1688717320807-f9385e5c299e?w=900&q=85",
     imageAlt: "Red and gold staircase climbing the hillside at Yutoku Inari Shrine, Saga",
     tag: "Must Visit",
@@ -54,6 +55,7 @@ const shrines = [
     access: "10-min walk from Takeo Onsen Station; 50-min from Fukuoka (Hakata) by Kamome limited express",
     hours: "Open daily, dawn to dusk",
     admission: "Free",
+    officialUrl: "https://takeo-jinjya.jp/",
     image: "https://images.pexels.com/photos/35352872/pexels-photo-35352872.jpeg?auto=compress&cs=tinysrgb&w=900",
     imageAlt: "Takeo Shrine illuminated at night with colorful umbrella decorations, Saga",
     tag: "Hidden Gem",
@@ -87,8 +89,22 @@ const shrines = [
     access: "5-min walk from Karatsu Station; 1h from Fukuoka (Hakata) by Midori/Karatsu limited express",
     hours: "Open daily, 9:00–17:00",
     admission: "Free (Hikiyama Exhibition Hall: ¥500)",
-    image: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=900&q=85",
-    imageAlt: "Traditional Japanese shrine torii gate",
+    officialUrl: "https://www.karatsu-jinja.org/",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Torii_of_Karatsu_Shrine_-_Nov_3%2C_2010.jpg/1280px-Torii_of_Karatsu_Shrine_-_Nov_3%2C_2010.jpg",
+    imageAlt: "Torii gate of Karatsu Shrine on November 3 during the Karatsu Kunchi festival, Saga Prefecture",
+    // chris_harber / Wikimedia Commons (CC BY-SA 2.0)
+    gallery: [
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Torii_of_Karatsu_Shrine_-_Nov_3%2C_2010.jpg/1280px-Torii_of_Karatsu_Shrine_-_Nov_3%2C_2010.jpg",
+        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Torii_of_Karatsu_Shrine_-_Nov_3%2C_2010.jpg/300px-Torii_of_Karatsu_Shrine_-_Nov_3%2C_2010.jpg",
+        alt: "Torii gate of Karatsu Shrine on Karatsu Kunchi festival day (Nov 3), Saga",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Torii_and_Honden_of_Karatsu_Shrine.JPG/1280px-Torii_and_Honden_of_Karatsu_Shrine.JPG",
+        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Torii_and_Honden_of_Karatsu_Shrine.JPG/300px-Torii_and_Honden_of_Karatsu_Shrine.JPG",
+        alt: "Torii and main hall (honden) of Karatsu Shrine, Karatsu City, Saga Prefecture",
+      },
+    ],
     tag: "Festival Highlight",
     tagColor: "bg-[#c9a84c] text-[#1a2744]",
   },
@@ -108,8 +124,27 @@ const shrines = [
     access: "10-min walk or 5-min bicycle from JR Saga Station",
     hours: "Open daily, dawn to dusk",
     admission: "Free",
-    image: "https://images.unsplash.com/photo-1580979898770-32661552c55c?w=900&q=85",
-    imageAlt: "Stone lanterns lining the path of a traditional Japanese shrine",
+    officialUrl: "https://yokajinjya.sagafan.jp/",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Yoka-jinja_Shrine_camphor_tree.JPG/1280px-Yoka-jinja_Shrine_camphor_tree.JPG",
+    imageAlt: "Ancient 1,200-year-old camphor tree at Yoka Shrine, Saga City",
+    // Pekachu / Wikimedia Commons (CC BY-SA 4.0)
+    gallery: [
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Yoka-jinja_Shrine_camphor_tree.JPG/1280px-Yoka-jinja_Shrine_camphor_tree.JPG",
+        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Yoka-jinja_Shrine_camphor_tree.JPG/300px-Yoka-jinja_Shrine_camphor_tree.JPG",
+        alt: "Ancient 1,200-year-old camphor tree at Yoka Shrine, Saga City",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Yoka-jinja_Shrine_Front.JPG/1280px-Yoka-jinja_Shrine_Front.JPG",
+        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Yoka-jinja_Shrine_Front.JPG/300px-Yoka-jinja_Shrine_Front.JPG",
+        alt: "Main gate (romon) and approach of Yoka Shrine, Saga City",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Yoka-jinja_Shrine_romon_2023.jpg/1280px-Yoka-jinja_Shrine_romon_2023.jpg",
+        thumb: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Yoka-jinja_Shrine_romon_2023.jpg/300px-Yoka-jinja_Shrine_romon_2023.jpg",
+        alt: "Romon gate of Yoka Shrine illuminated, Saga City, 2023",
+      },
+    ],
     tag: "Local Favourite",
     tagColor: "bg-stone-600",
   },
@@ -289,6 +324,12 @@ const schema = {
                   <span class="text-stone-400 w-20 flex-shrink-0">Admission</span>
                   <span class="text-stone-700">{shrine.admission}</span>
                 </div>
+                {'officialUrl' in shrine && (
+                  <div class="flex gap-2 pt-1 border-t border-stone-100">
+                    <span class="text-stone-400 w-20 flex-shrink-0">Website</span>
+                    <a href={(shrine as any).officialUrl} target="_blank" rel="noopener noreferrer" class="text-[#bc002d] hover:underline font-medium">Official site →</a>
+                  </div>
+                )}
               </div>
             </div>
           </div>

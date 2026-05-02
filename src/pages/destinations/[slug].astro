@@ -150,6 +150,24 @@ const schema = {
             </ul>
           </div>
 
+          <!-- Shrine Guide (saga / nagasaki only) -->
+          {(d.slug === 'saga' || d.slug === 'nagasaki') && (
+            <a
+              href={`/${d.slug}-shrines`}
+              class="block bg-[#1a2744] rounded-2xl p-6 hover:bg-[#243460] transition-colors"
+            >
+              <p class="text-xs text-[#c9a84c] font-semibold uppercase tracking-wider mb-1">Shrine Guide</p>
+              <p class="font-serif font-bold text-white text-lg leading-snug">
+                {d.slug === 'saga' ? 'Sacred Saga: Shrine Guide →' : 'Sacred Nagasaki: Shrine Guide →'}
+              </p>
+              <p class="text-sm text-white/60 mt-1">
+                {d.slug === 'saga'
+                  ? 'Yutoku Inari, Takeo & Karatsu shrines'
+                  : 'Suwa, Sanno & Wakamiya Inari shrines'}
+              </p>
+            </a>
+          )}
+
           <!-- Booking -->
           <AffiliateBox
             type="booking"

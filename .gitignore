@@ -23,3 +23,7 @@ Thumbs.db
 
 # jetbrains setting folder
 .idea/
+
+# generated script output and input drafts
+scripts/output/
+scripts/input/
