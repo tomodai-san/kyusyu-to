@@ -10,6 +10,9 @@ export default defineConfig({
   // 静的出力（Cloudflare Pages はこれで動く）
   output: 'static',
 
+  // 末尾スラッシュを統一（Cloudflare Pagesのリダイレクトと一致させる）
+  trailingSlash: 'always',
+
   integrations: [
     sitemap(),
   ],

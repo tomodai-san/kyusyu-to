@@ -41,7 +41,17 @@
       "WebSearch",
       "Bash(git -C \"C:/Users/AI/Desktop/Kyushu-Tourism\" status)",
       "Bash(git -C \"C:/Users/AI/Desktop/Kyushu-Tourism\" diff --stat)",
-      "Bash(git *)"
+      "Bash(git *)",
+      "mcp__ide__getDiagnostics",
+      "Bash(curl -sI \"https://images.pexels.com/photos/35352872/pexels-photo-35352872.jpeg?auto=compress&cs=tinysrgb&w=300\")",
+      "Bash(curl -sI \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Yoka-jinja_Shrine_camphor_tree.JPG/300px-Yoka-jinja_Shrine_camphor_tree.JPG\")",
+      "Bash(curl -sI \"https://images.unsplash.com/photo-1688717320807-f9385e5c299e?w=300&q=70\")",
+      "Bash(curl -sI \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Yoka-jinja_Shrine_camphor_tree.JPG/320px-Yoka-jinja_Shrine_camphor_tree.JPG\")",
+      "WebFetch(domain:www.jalan.net)",
+      "WebFetch(domain:travel.rakuten.co.jp)",
+      "Bash(python -m py_compile ranking_video.py)",
+      "Bash(python -m py_compile ranking_ui.py)",
+      "Bash(python -m py_compile image_fetcher.py)"
     ]
   }
 }
