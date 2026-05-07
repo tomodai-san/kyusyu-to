@@ -1,2 +1,1 @@
-# wwwからnon-wwwへ統一（canonical URL統一）
-https://www.realkyushu.com/* https://realkyushu.com/:splat 301
+# Cloudflare Workers redirects (relative URLs only)
