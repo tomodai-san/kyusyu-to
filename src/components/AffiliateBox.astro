@@ -1,6 +1,6 @@
 ---
 interface Props {
-  type: 'booking' | 'klook';
+  type: 'klook';
   title?: string;
   description?: string;
   url?: string;
@@ -18,14 +18,6 @@ const {
 } = Astro.props;
 
 const defaults = {
-  booking: {
-    title: 'Book Your Stay in Kyushu',
-    description: 'Find the best ryokan and hotel deals with free cancellation on most properties.',
-    buttonText: 'Search on Booking.com',
-    logo: '🏨',
-    bg: 'bg-[#003580]',
-    btnBg: 'bg-[#feba02] hover:bg-[#f5ad00] text-[#003580]',
-  },
   klook: {
     title: 'Book Tours & Activities',
     description: 'Kyushu onsen day passes, cooking classes, day tours, and unique local experiences.',

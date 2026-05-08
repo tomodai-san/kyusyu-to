@@ -10,7 +10,6 @@
   description: string;
   image: string;
   amenities: string[];
-  bookingUrl: string;
   category: "luxury" | "boutique" | "traditional" | "budget";
   featured: boolean;
 }
@@ -36,7 +35,6 @@ export const ryokans: Ryokan[] = [
       "Airport transfer",
       "Tea ceremony",
     ],
-    bookingUrl: "https://www.booking.com/affiliate/kyushu-explorer",
     category: "luxury",
     featured: true,
   },
@@ -60,7 +58,6 @@ export const ryokans: Ryokan[] = [
       "Breakfast & dinner",
       "Steam-heated rooms",
     ],
-    bookingUrl: "https://www.booking.com/affiliate/kyushu-explorer",
     category: "traditional",
     featured: true,
   },
@@ -84,7 +81,6 @@ export const ryokans: Ryokan[] = [
       "Sake sommelier",
       "City walking tour",
     ],
-    bookingUrl: "https://www.booking.com/affiliate/kyushu-explorer",
     category: "boutique",
     featured: true,
   },
@@ -108,7 +104,6 @@ export const ryokans: Ryokan[] = [
       "Futon sleeping",
       "Free bicycle hire",
     ],
-    bookingUrl: "https://www.booking.com/affiliate/kyushu-explorer",
     category: "traditional",
     featured: true,
   },
@@ -132,7 +127,6 @@ export const ryokans: Ryokan[] = [
       "Kagoshima wagyu dinner",
       "Japanese garden",
     ],
-    bookingUrl: "https://www.booking.com/affiliate/kyushu-explorer",
     category: "luxury",
     featured: true,
   },
@@ -156,7 +150,6 @@ export const ryokans: Ryokan[] = [
       "Breakfast optional",
       "Bicycle hire",
     ],
-    bookingUrl: "https://www.booking.com/affiliate/kyushu-explorer",
     category: "budget",
     featured: false,
   },

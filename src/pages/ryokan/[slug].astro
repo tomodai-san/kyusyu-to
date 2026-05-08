@@ -119,7 +119,7 @@ const schema = {
 
         <!-- Sidebar -->
         <aside class="space-y-5">
-          <!-- Booking Card -->
+          <!-- Info Card -->
           <div class="bg-[#faf8f3] rounded-2xl p-6 sticky top-24">
             <div class="text-center mb-5">
               <div class="text-3xl font-serif font-bold text-[#bc002d]">{r.rating} / 5</div>
@@ -133,7 +133,7 @@ const schema = {
               <div class="text-stone-400 text-xs mt-1">{r.reviewCount.toLocaleString()} guest reviews</div>
             </div>
 
-            <dl class="space-y-3 mb-5">
+            <dl class="space-y-3">
               {[
                 { label: 'Location', value: r.location },
                 { label: 'Category', value: r.category.charAt(0).toUpperCase() + r.category.slice(1) },
@@ -145,19 +145,6 @@ const schema = {
                 </div>
               ))}
             </dl>
-
-            <a
-              href={r.bookingUrl}
-              target="_blank"
-              rel="noopener noreferrer sponsored"
-              class="w-full flex items-center justify-center gap-2 bg-[#003580] hover:bg-[#002a6a] text-white font-semibold py-3.5 px-5 rounded-xl transition-colors text-sm"
-            >
-              Check Availability
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-              </svg>
-            </a>
-            <p class="text-center text-xs text-stone-400 mt-3">via Booking.com · Affiliate link</p>
           </div>
         </aside>
       </div>
