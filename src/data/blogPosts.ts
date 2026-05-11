@@ -72,16 +72,16 @@ export const blogPosts: BlogPost[] = [
 <p>The Hells are spread across two clusters: six in the Kannawa district (a 15-minute bus ride from Beppu station) and two in the quieter Shibaseki area about 2km further north. A combined entry ticket covers all eight and is far better value than paying individually.</p>
 
 <h2>The Eight Hells, Explained</h2>
-<p><strong>Umi Jigoku (Sea Hell)</strong> is the most iconic — a cobalt blue pool that looks impossibly tropical despite bubbling at 98°C. The vivid colour comes from dissolved iron sulphate. Lotus flowers bloom on the surface in summer in defiance of the heat. This is usually everyone's favourite.</p>
+<p><strong>Umi Jigoku (Sea Hell)</strong> is the most iconic — a cobalt blue pool that looks impossibly tropical despite bubbling at 98°C. The vivid colour comes from dissolved silica (silicic acid) in the water. Lotus flowers bloom on the surface in summer in defiance of the heat. This is usually everyone's favourite.</p>
 <p><strong>Oniishibozu Jigoku (Shaven Head Hell)</strong> features large grey mud bubbles rising and popping with a satisfying glop, said to resemble the shaved heads of Buddhist monks. <strong>Shiraike Jigoku (White Pond Hell)</strong> is an eerily beautiful milky-white pool with a collection of tropical fish in the warm adjacent tanks. <strong>Kamado Jigoku (Cooking Pot Hell)</strong> has multiple pools at different temperatures and a theatrical demon mask at the entrance — children love it.</p>
 <p><strong>Oniyama Jigoku (Crocodile Hell)</strong> is home to over 100 crocodiles kept in pens warmed by geothermal water — bizarre, slightly unsettling, and utterly memorable. <strong>Yama Jigoku (Mountain Hell)</strong> is the smallest and least impressive, with hippos and flamingos in geothermally heated enclosures. <strong>Chinoike Jigoku (Blood Pond Hell)</strong> is perhaps the most dramatic — a vivid red pool caused by iron oxide and magnesium chloride, with a hellish landscape of red-stained rocks. Finally, <strong>Tatsumaki Jigoku (Waterspout Hell)</strong> features a geyser that erupts every 30–40 minutes, shooting boiling water 50 metres into the air before a stone arch caps it.</p>
 
 <h2>Practical Information</h2>
 <ul>
-  <li><strong>Combined ticket:</strong> ¥2,200 for adults, ¥1,000 for children. Covers all 8 hells. Worth it if you plan to see more than 3.</li>
+  <li><strong>Combined ticket:</strong> Covers all 8 hells and is far better value than paying individually. Check current prices on the official Beppu Jigoku website before visiting.</li>
   <li><strong>Opening hours:</strong> Most Hells open 8am–5pm daily. Tatsumaki Jigoku sometimes has extended evening hours.</li>
   <li><strong>Time needed:</strong> Allow 3–4 hours for all eight at a leisurely pace, including the taxi or bus between Kannawa and Shibaseki clusters.</li>
-  <li><strong>Getting there:</strong> Take the Kamewa Bus from Beppu station (about 20 minutes, ¥380). Taxis between the two clusters cost around ¥800.</li>
+  <li><strong>Getting there:</strong> Take the Kamewa Bus from Beppu station (about 20 minutes). Taxis between the two clusters are also available.</li>
 </ul>
 
 <h2>After the Hells: Kannawa's Steam District</h2>
@@ -194,7 +194,7 @@ export const blogPosts: BlogPost[] = [
   <li><strong>Mizutaki:</strong> Fukuoka's signature hot pot — a delicate chicken broth collagen-rich and clean, served with chicken pieces, tofu, and vegetables. Dip in ponzu and sesame sauce.</li>
   <li><strong>Motsu nabe:</strong> Offal hot pot with a rich soy or miso-based broth, garlic, and chives. A local winter staple and far more approachable than it sounds.</li>
   <li><strong>Hakata gyoza:</strong> Pan-fried dumplings with thin, crispy skins — smaller and crispier than their Kyoto or Osaka counterparts.</li>
-  <li><strong>Kawara soba:</strong> Unique to the Kitakyushu area — thin buckwheat noodles served on a hot roof tile, topped with chashu and egg.</li>
+  <li><strong>Kawara soba:</strong> Originating in nearby Shimonoseki (Yamaguchi Prefecture) and widely enjoyed across northern Kyushu — thin buckwheat noodles served sizzling on a hot roof tile, topped with chashu and egg.</li>
   <li><strong>Fresh oysters:</strong> Hakata Bay oysters, available October through March, are among Japan's finest — especially from the stands at Yanagibashi Rengo Market.</li>
   <li><strong>Kasutera:</strong> The Nagasaki-origin sponge cake sold throughout Kyushu, but Fukuoka's Bunmeido shop near Hakata station is the best place to buy it as an edible souvenir.</li>
 </ul>
@@ -218,7 +218,7 @@ export const blogPosts: BlogPost[] = [
     featured: false,
     body: `
 <h2>About Yakushima</h2>
-<p>Yakushima is a roughly circular island 60km in circumference, located 60km south of Kagoshima. Its interior rises dramatically to Miyanoura-dake (1,936m), the highest peak in Kyushu, and the island receives up to 10,000mm of annual rainfall in its mountain core — making it one of the wettest places on Earth and producing a forest of extraordinary density and antiquity. The UNESCO World Heritage designation in 1993 protects the island's interior, where Yakusugi cedars (Cryptomeria japonica) of over 1,000 years grow in groves that feel genuinely prehistoric.</p>
+<p>Yakushima is a roughly circular island approximately 130km in circumference, located 60km south of Kagoshima. Its interior rises dramatically to Miyanoura-dake (1,936m), the highest peak in Kyushu, and the island receives up to 10,000mm of annual rainfall in its mountain core — making it one of the wettest places on Earth and producing a forest of extraordinary density and antiquity. The UNESCO World Heritage designation in 1993 protects the island's interior, where Yakusugi cedars (Cryptomeria japonica) of over 1,000 years grow in groves that feel genuinely prehistoric.</p>
 <p>Yakushima is the island believed to have inspired the setting of Studio Ghibli's Princess Mononoke. Walking through the Shiratani Unsuikyo ravine — its mossy boulders and twisted ancient trees exactly matching Miyazaki's hand-painted backgrounds — the comparison becomes immediately obvious. The island also has a permanent population of Yakushima macaques and sika deer habituated to humans, often seen grazing roadside with complete indifference to observers.</p>
 
 <h2>Top Trails</h2>
@@ -231,9 +231,9 @@ export const blogPosts: BlogPost[] = [
 
 <h2>Getting to Yakushima</h2>
 <ul>
-  <li><strong>Ferry from Kagoshima:</strong> The Toppy high-speed ferry takes approximately 2 hours (¥8,100 one way) and is the most common access route. Book ahead in high season — it sells out.</li>
-  <li><strong>Slow ferry:</strong> The cargo-passenger ferry Anei takes 4 hours but is significantly cheaper (¥3,000) and has reclining seats. A good option if you're not in a hurry.</li>
-  <li><strong>Flight from Kagoshima:</strong> 35 minutes (¥14,000–18,000). Useful if ferries are booked out, but baggage limits are strict on the small propeller aircraft.</li>
+  <li><strong>Ferry from Kagoshima:</strong> The Toppy high-speed ferry takes approximately 2 hours and is the most common access route. Book ahead in high season — it sells out. Check current fares on the Tanegashima/Yakushima Koku website.</li>
+  <li><strong>Slow ferry:</strong> The cargo-passenger ferry (Yakushima Ferry) takes around 4 hours but is significantly cheaper than the high-speed option and has reclining seats. A good choice if you're not in a hurry.</li>
+  <li><strong>Flight from Kagoshima:</strong> Around 35 minutes. Useful if ferries are booked out, but baggage limits are strict on the small propeller aircraft.</li>
 </ul>
 
 <h2>Practical Tips</h2>
@@ -242,7 +242,7 @@ export const blogPosts: BlogPost[] = [
   <li><strong>Trailhead shuttles:</strong> Private cars cannot access Arakawa trailhead during peak season (March–November). Shuttle buses run from Yakusugi Land from around 4am. Get there early or you'll miss the first buses.</li>
   <li><strong>Yakusugi Museum and Yakusugi Land:</strong> Both worth a half-day visit to understand the island's ecology and see ancient cedar specimens without the full-day commitment of the Jomon Sugi hike.</li>
   <li><strong>Accommodation:</strong> Book accommodation in Miyanoura (the main port town) or Anbo well in advance. Options are limited and demand is high from April through October.</li>
-  <li><strong>Access fee:</strong> A ¥1,000 voluntary conservation fee (Yakushima Kankyou Bunka Mura) is requested on arrival — pay it. The island's preservation depends on visitor contributions.</li>
+  <li><strong>Access fee:</strong> A voluntary conservation fee (Yakushima Kankyou Bunka Mura) is requested on arrival — pay it. The island's preservation depends on visitor contributions. Check the current amount before travelling.</li>
 </ul>
     `,
   },
