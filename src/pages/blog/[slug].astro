@@ -94,33 +94,7 @@ const schema = {
           <!-- Lead -->
           <p class="text-xl text-stone-600 leading-relaxed mb-8 font-medium">{p.excerpt}</p>
 
-          <!-- Article body placeholder — in a real site this would come from MDX/CMS -->
-          <div class="prose-japan">
-            <p>
-              Kyushu, Japan's southernmost main island, is a destination that rewards curious travellers willing to look beyond the well-worn Tokyo–Kyoto–Osaka trail. With its extraordinary diversity of landscapes — from the smoking caldera of Mt. Aso to the pristine subtropical forests of Yakushima — and a culinary scene that arguably surpasses any region in Japan, Kyushu deserves far more attention than it currently receives from international visitors.
-            </p>
-            <p>
-              Whether you're planning your first trip to Japan or returning for a deeper dive, this comprehensive guide will help you make the most of your time on this remarkable island.
-            </p>
-
-            <h2>The Essentials</h2>
-            <p>
-              Kyushu covers roughly 36,000 km² and is divided into seven prefectures, each with its own distinct character. The island is served by the Kyushu Shinkansen running north to south, plus an excellent network of limited express trains covering every major destination. You genuinely do not need a rental car to explore Kyushu's highlights.
-            </p>
-
-            <h2>Practical Information</h2>
-            <ul>
-              <li><strong>Entry requirements:</strong> UK, US, Australian, Canadian, and EU citizens can stay up to 90 days visa-free in Japan.</li>
-              <li><strong>Currency:</strong> Japan is largely cash-based outside of cities; carry yen. 7-Eleven and Japan Post ATMs accept international cards.</li>
-              <li><strong>Transport:</strong> The JR Kyushu Rail Pass covers all Shinkansen and limited express trains. Buy it before you leave home.</li>
-              <li><strong>Language:</strong> English is not widely spoken outside tourist areas. Download the Google Translate app with Japanese offline.</li>
-            </ul>
-
-            <h2>Our Top Recommendation</h2>
-            <p>
-              If you're pressed for time, focus on the Fukuoka–Yufuin–Beppu triangle. It captures the essence of Kyushu — street food, hot springs, mountain scenery — and is easily doable in 3–4 days, accessible by some of Japan's most scenic train journeys.
-            </p>
-          </div>
+          <div class="prose-japan" set:html={p.body} />
 
           <!-- Affiliate mid-article -->
           <div class="my-10">

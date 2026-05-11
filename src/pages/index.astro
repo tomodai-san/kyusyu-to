@@ -123,7 +123,7 @@ const sectionLink = (href: string, label: string) => ({ href, label });
     <!-- Stats strip -->
     <div class="flex items-center gap-8 mt-10">
       {[
-        { n: '6',    label: 'Destinations' },
+        { n: String(destinations.length), label: 'Destinations' },
         { n: '5+',   label: 'Itineraries' },
         { n: '100+', label: 'Travel Tips' },
       ].map((s, i) => (
@@ -266,7 +266,7 @@ const sectionLink = (href: string, label: string) => ({ href, label });
         <h2 class="section-heading">Where to Go in Kyushu</h2>
       </div>
       <a href="/destinations" class="hidden sm:inline-flex items-center gap-1.5 text-[#bc002d] text-sm font-semibold hover:gap-3 transition-all group">
-        All 6 Destinations
+        All {destinations.length} Destinations
         <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
         </svg>
@@ -274,6 +274,7 @@ const sectionLink = (href: string, label: string) => ({ href, label });
     </div>
 
     <!-- Featured pair (large) + grid (small) -->
+    {featuredDestinations.length >= 2 && (
     <div class="grid grid-cols-1 lg:grid-cols-5 gap-5 mb-5">
       <!-- Large card 1 -->
       <a
@@ -323,6 +324,7 @@ const sectionLink = (href: string, label: string) => ({ href, label });
         </div>
       </a>
     </div>
+    )}
 
     <!-- Smaller grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -339,7 +341,7 @@ const sectionLink = (href: string, label: string) => ({ href, label });
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
           </svg>
         </div>
-        <span class="text-sm font-semibold text-stone-500 group-hover:text-[#bc002d] transition-colors">See All 6 Destinations</span>
+        <span class="text-sm font-semibold text-stone-500 group-hover:text-[#bc002d] transition-colors">See All {destinations.length} Destinations</span>
       </a>
     </div>
   </div>
@@ -418,9 +420,7 @@ const sectionLink = (href: string, label: string) => ({ href, label });
 ═══════════════════════════════════════════════════════════════ -->
 <section class="py-14 bg-white border-y border-stone-100">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-      <AffiliateBox type="klook"   url="https://affiliate.klook.com/redirect?aid=119974&aff_adid=1266564&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2F" />
-    </div>
+    <AffiliateBox type="klook" url="https://affiliate.klook.com/redirect?aid=119974&aff_adid=1266564&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2F" />
   </div>
 </section>
 
