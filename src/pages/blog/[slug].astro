@@ -94,6 +94,7 @@ const schema = {
           <!-- Lead -->
           <p class="text-xl text-stone-600 leading-relaxed mb-8 font-medium">{p.excerpt}</p>
 
+          {/* p.body must only ever contain static developer-authored HTML from src/data/blogPosts.ts — never external or user input */}
           <div class="prose-japan" set:html={p.body} />
 
           <!-- Affiliate mid-article -->

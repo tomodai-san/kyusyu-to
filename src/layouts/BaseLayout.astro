@@ -81,7 +81,7 @@ const fullTitle = title.includes('Kyushu') ? title : `${title} | Kyushu Explorer
 
     <!-- JSON-LD Schema -->
     {schema && (
-      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+      <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/<\//g, '<\\/')} />
     )}
 
     <!-- Default WebSite Schema -->
@@ -91,7 +91,7 @@ const fullTitle = title.includes('Kyushu') ? title : `${title} | Kyushu Explorer
       "name": "Kyushu Explorer",
       "url": siteUrl,
       "description": "Your ultimate guide to travel in Kyushu, Japan",
-    })} />
+    }).replace(/<\//g, '<\\/')} />
   </head>
   <body>
     <Header />

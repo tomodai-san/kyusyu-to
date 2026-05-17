@@ -470,15 +470,20 @@ const schema = {
 
     function open(g, idx) {
       gallery = g;
-      lbThumbs.innerHTML = gallery.map((p, i) => {
+      lbThumbs.replaceChildren(...gallery.map((p, i) => {
         var ts = p.thumb ? p.thumb : (p.src.includes('?') ? p.src : p.src + '?w=160&q=70');
-        return '<button class="overflow-hidden rounded-lg w-16 h-12 flex-shrink-0 transition-all" data-i="' + i + '">' +
-        '<img src="' + ts + '" alt="' + p.alt + '" class="w-full h-full object-cover" loading="lazy" />' +
-        '</button>';
-      }).join('');
-      lbThumbs.querySelectorAll('button').forEach(b => {
-        b.addEventListener('click', () => show(Number(b.dataset.i)));
-      });
+        var btn = document.createElement('button');
+        btn.className = 'overflow-hidden rounded-lg w-16 h-12 flex-shrink-0 transition-all';
+        btn.dataset.i = i;
+        var img = document.createElement('img');
+        img.src = ts;
+        img.alt = p.alt;
+        img.className = 'w-full h-full object-cover';
+        img.loading = 'lazy';
+        btn.appendChild(img);
+        btn.addEventListener('click', () => show(i));
+        return btn;
+      }));
       show(idx);
       dialog.showModal();
     }
