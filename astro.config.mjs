@@ -3,6 +3,8 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
+import cloudflare from '@astrojs/cloudflare';
+
 export default defineConfig({
   // 本番ドメインが決まったら変更する
   site: 'https://realkyushu.com',
@@ -24,4 +26,6 @@ export default defineConfig({
       assetsInlineLimit: 0,
     },
   },
+
+  adapter: cloudflare(),
 });
